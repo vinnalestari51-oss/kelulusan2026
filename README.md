@@ -14,6 +14,8 @@
             --primary-dark: #4a6984;
             --success-pastel: #b2e2b2; /* Hijau pastel untuk kelulusan */
             --success-text: #2b5e2b;
+            --info-pastel: #e0f2fe; /* Biru pastel untuk info pengumuman */
+            --info-text: #0369a1;
             --error-pastel: #fbc4c4;
             --error-text: #721c24;
             --text-color: #4f5d75;
@@ -205,6 +207,21 @@
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
         }
 
+        /* Pengumuman Pengambilan SKL & Rapor */
+        .info-distribution {
+            background-color: var(--info-pastel);
+            color: var(--info-text);
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            border: 1px solid #bae6fd;
+        }
+        .info-distribution strong {
+            color: #0369a1;
+        }
+
         .student-title {
             font-size: 1.1rem;
             font-weight: 700;
@@ -306,7 +323,7 @@ const GRADUATION_DATABASE = [
     { nisn: "0118789434", name: "RAJA FATHUR ABDILLAH", average: "82.50" },
     { nisn: "0112333526", name: "RINA RIYANTI", average: "84.20" },
     { nisn: "0113962310", name: "RISNA ULKA ARYANI", average: "81.44" },
-    { nisn: "0113067688", text_name_alt: "RISKA SARI", name: "RISKA SARI", average: "80.12" },
+    { nisn: "0113067688", name: "RISKA SARI", average: "80.12" },
     { nisn: "0114699199", name: "RISKY ARDIAN MISKA SACHPUTRA", average: "77.42" },
     { nisn: "0115867734", name: "RIZKA ALFIA AZ ZAHRA", average: "87.94" },
     { nisn: "0117587242", name: "SAPINAH", average: "80.34" },
@@ -342,7 +359,7 @@ function cekKelulusan() {
         return;
     }
 
-    // 2. Validasi Angka Keras 10 Digit (Sistem Keamanan Check & Submit)
+    // 2. Validasi Angka Keras 10 Digit
     if (queryNisn.length !== 10 || isNaN(queryNisn)) {
         errorBox.style.display = 'flex';
         errorBox.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> NISN harus berjumlah persis 10 digit angka.';
@@ -365,12 +382,18 @@ function cekKelulusan() {
     setTimeout(() => {
         loadingBox.style.display = 'none';
         
-        // Memunculkan tampilan data persis seperti struktur web sebelumnya
+        // Memunculkan data kelulusan serta teks instruksi pembagian SKL dan Rapor
         resultBox.innerHTML = `
             <div class="graduation-card">
                 <div class="alert-status">
                     <i class="fa-solid fa-circle-check"></i> Selamat, Anda dinyatakan LULUS!
                 </div>
+
+                <div class="info-distribution">
+                    <i class="fa-solid fa-circle-info"></i> <strong>Informasi Sekolah:</strong><br>
+                    Surat Keterangan Lulus (SKL) dan Rapor akan dibagikan pada hari <strong>Sabtu, 6 Juni 2026 Jam 09.00 WIB</strong> di ruang <strong>TU SMP Negeri 1 Lingga</strong>.
+                </div>
+
                 <div class="student-title">${matchStudent.name}</div>
                 
                 <div class="data-row">
