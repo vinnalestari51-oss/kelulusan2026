@@ -406,7 +406,7 @@ function cekKelulusan() {
                 </div>
                 <div class="data-row">
                     <span class="data-label">Status Kelulusan</span>
-                    <span class="data-value" style="color: #16a34a;">LULUS loh</span>
+                    <span class="data-value" style="color: #16a34a;">LULUS</span>
                 </div>
             </div>
         `;
