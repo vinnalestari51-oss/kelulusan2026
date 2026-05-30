@@ -201,7 +201,7 @@
             background: #1e40af;
         }
 
-        /* --- LOADING SPINNER DRAMATIS --- */
+        /* --- LOADING SPINNER --- */
         .loading-container {
             display: none;
             flex-direction: column;
@@ -240,7 +240,7 @@
             overflow: hidden;
         }
 
-        /* Rank 1 (Juara 1): Hijau Pastel, Shimmer Glow */
+        /* Rank 1 (Juara 1) */
         .card-rank-1 {
             background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%) !important;
             border: 2px solid #34d399 !important;
@@ -248,17 +248,17 @@
             background-size: 200% 200%;
             animation: shimmer 3s linear infinite;
         }
-        /* Rank 2 (Juara 2): Biru Pastel Lembut */
+        /* Rank 2 (Juara 2) */
         .card-rank-2 {
             background: linear-gradient(135deg, #dbaefe 0%, #bfdbfe 100%) !important;
             border: 1px solid #93c5fd !important;
         }
-        /* Rank 3 (Juara 3): Perunggu / Oranye Pastel Hangat */
+        /* Rank 3 (Juara 3) */
         .card-rank-3 {
             background: linear-gradient(135deg, #ffedd5 0%, #fdbb74 100%) !important;
             border: 1px solid #f97316 !important;
         }
-        /* Rank 4 Ke Bawah: M3 Glass Standar */
+        /* Rank 4 Ke Bawah */
         .card-rank-normal {
             background: rgba(255, 255, 255, 0.85);
         }
@@ -269,7 +269,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Surprise Bounce Effect */
         .bounce-effect {
             animation: surpriseBounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
         }
@@ -280,7 +279,6 @@
             100% { transform: scale(1); opacity: 1; }
         }
 
-        /* Komponen Identitas Kartu */
         .student-profile {
             display: flex;
             align-items: center;
@@ -296,7 +294,7 @@
         .profile-info p {
             font-size: 12px;
             color: #64748b;
-            margin-top: 2px;
+            margin-top: 4px;
         }
         .rank-badge {
             padding: 6px 12px;
@@ -312,7 +310,7 @@
         .badge-3 { background: #ea580c; color: white; }
         .badge-normal { background: #64748b; color: white; }
 
-        /* Tata Letak Nilai Vertikal (Anti-Nabrak di Layar Sempit) */
+        /* Tata Letak Nilai Vertikal */
         .score-rows-container {
             display: flex;
             flex-direction: column;
@@ -356,7 +354,6 @@
             color: #0f172a;
         }
 
-        /* Bagian Kaki Kartu & Info Rata-Rata */
         .card-footer-summary {
             background: rgba(0, 0, 0, 0.03);
             border-radius: 14px;
@@ -407,7 +404,7 @@
             font-size: 10px;
         }
 
-        /* --- FIXED BOTTOM NAVBAR (TINGGI 64px) --- */
+        /* --- FIXED BOTTOM NAVBAR --- */
         .bottom-navbar {
             position: fixed;
             bottom: 0;
@@ -487,10 +484,10 @@
 
         <div id="page-nilaiku" class="tab-content">
             <div class="m3-glass search-box">
-                <label for="student-search-input">Masukkan NISN Lengkap Siswa</label>
+                <label for="student-search-input">Masukkan Nama Lengkap Siswa</label>
                 <div class="input-wrapper">
-                    <i class="fa-solid fa-id-card"></i>
-                    <input type="tel" id="student-search-input" placeholder="Ketik 10 Digit NISN Resmi..." autocomplete="off" maxlength="10">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" id="student-search-input" placeholder="Contoh: ADELIA DWI NURMANSYAH..." autocomplete="off">
                 </div>
                 <button class="btn-search" onclick="processSearch()"><i class="fa-solid fa-envelope-open-text"></i>Buka Amplop Nilai</button>
             </div>
@@ -517,97 +514,96 @@
     </nav>
 
     <script>
-        // DATASET UTAMA: Ekstraksi Data Siswa & NISN dari Dokumen DKHTKA
-        // Contoh NISN disimulasikan 10-digit unik berurutan berdasarkan nomor absen untuk keperluan operasional proteksi sistem
+        // DATASET UTAMA: Berdasarkan data resmi Transkrip Nilai Kumer SMP 2026
         const rawStudentsData = [
-            { nisn: "0123456701", name: "ADELIA DWI NURMANSYAH", mtk: 89.60, ind: 89.00 },
-            { nisn: "0123456702", name: "ANANDA IBNU FAHREZI", mtk: 78.20, ind: 79.60 },
-            { nisn: "0123456703", name: "DAFITRA ARIANSYAH", mtk: 76.60, ind: 76.80 },
-            { nisn: "0123456704", name: "DELVRY ANGGARA PANJAITAN", mtk: 83.20, ind: 84.00 },
-            { nisn: "0123456705", name: "DYRA ALTHA FUNISYA", mtk: 92.20, ind: 92.20 },
-            { nisn: "0123456706", name: "FAQIHA TAZKIATUN NUFUS", mtk: 81.80, ind: 80.20 },
-            { nisn: "0123456707", name: "GHASTAN GAUTAMA GINARDA", mtk: 85.00, ind: 92.60 },
-            { nisn: "0123456708", name: "JEANTRIKA SAPUTERA", mtk: 79.00, ind: 78.00 },
-            { nisn: "0123456709", name: "LIYANA ZAHIRA", mtk: 78.00, ind: 80.80 },
-            { nisn: "0123456710", name: "M.BAYU RIZKITULLAH", mtk: 84.60, ind: 82.40 },
-            { nisn: "0123456711", name: "MARWA DWI RAMADANI", mtk: 78.80, ind: 86.80 },
-            { nisn: "0123456712", name: "MUHAMMAD FADHIL ARDIANSYAH", mtk: 83.20, ind: 81.80 },
-            { nisn: "0123456713", name: "MUHAMMAD GIBRAN ASSYAFAR", mtk: 78.00, ind: 82.00 },
-            { nisn: "0123456714", name: "MUHAMMAD MUFLIH HIBATULLAH", mtk: 77.80, ind: 76.20 },
-            { nisn: "0123456715", name: "NATASYA ZULHAFIFAH", mtk: 82.20, ind: 86.40 },
-            { nisn: "0123456716", name: "RAFADIL ANANTA", mtk: 73.00, ind: 75.60 },
-            { nisn: "0123456717", name: "RAJA FATHUR ABDILLAH", mtk: 83.80, ind: 82.00 },
-            { nisn: "0123456718", name: "RATI JUNILA", mtk: 77.00, ind: 82.40 },
-            { nisn: "0123456719", name: "REFAN PINANDO", mtk: 77.60, ind: 76.20 },
-            { nisn: "0123456720", name: "RINA RIYANTI", mtk: 86.20, ind: 85.60 },
-            { nisn: "0123456721", name: "RISNA ULKA ARYANI", mtk: 81.40, ind: 77.80 },
-            { nisn: "0123456722", name: "RIZKA INDRI ADELIASA", mtk: 82.00, ind: 77.40 },
-            { nisn: "0123456723", name: "SHERIL GIANDA UTAMI", mtk: 78.00, ind: 77.20 },
-            { nisn: "0123456724", name: "SILA ADELIA", mtk: 77.60, ind: 77.80 },
-            { nisn: "0123456725", name: "SUKMASARI", mtk: 81.40, ind: 83.60 },
-            { nisn: "0123456726", name: "SYARIFAH NAFIA SAFIZ", mtk: 80.80, ind: 90.00 },
-            { nisn: "0123456727", name: "VIKY ADITYA SYAPUTRA", mtk: 77.80, ind: 76.20 },
-            { nisn: "0123456728", name: "ZALFA MUFIDAH INAYAH", mtk: 85.20, ind: 83.40 },
-            { nisn: "0123456729", name: "ΖΑΤΙΑ ΜAYSYA", mtk: 91.60, ind: 87.20 },
-            { nisn: "0123456730", name: "ADONIA NAJLA RAISSA", mtk: 81.40, ind: 82.80 },
-            { nisn: "0123456731", name: "AIRIN DWI RAMADHANI", mtk: 83.00, ind: 87.40 },
-            { nisn: "0123456732", name: "AISH GHAZIYA RAFIFA", mtk: 80.40, ind: 81.60 },
-            { nisn: "0123456733", name: "ARYA IMAM RISNANDA", mtk: 78.20, ind: 78.60 },
-            { nisn: "0123456734", name: "DEBY SEPTIANI", mtk: 90.20, ind: 88.80 },
-            { nisn: "0123456735", name: "DZIKRI HARITH HAZIQ", mtk: 79.60, ind: 80.20 },
-            { nisn: "0123456736", name: "GUNAWAN FAUZI", mtk: 76.80, ind: 76.20 },
-            { nisn: "0123456737", name: "IBNU SHALIM", mtk: 81.40, ind: 76.80 },
-            { nisn: "0123456738", name: "IMAM SYAHIBBULLAH", mtk: 76.20, ind: 77.20 },
-            { nisn: "0123456739", name: "IRVAN KURNIA", mtk: 77.80, ind: 79.80 },
-            { nisn: "0123456740", name: "ISNAINI", mtk: 80.60, ind: 76.80 },
-            { nisn: "0123456741", name: "KAFHA AZRI ILHAMSYAH", mtk: 76.00, ind: 76.60 },
-            { nisn: "0123456742", name: "KHASBI NOVALDI", mtk: 74.20, ind: 76.80 },
-            { nisn: "0123456743", name: "LIPIANA SUCI RAMARANI", mtk: 87.60, ind: 87.80 },
-            { nisn: "0123456744", name: "MECA ADELYA CAHYANI", mtk: 85.80, ind: 93.00 },
-            { nisn: "0123456745", name: "MEISYA AWALUN NURHASANAH", mtk: 77.40, ind: 77.40 },
-            { nisn: "0123456746", name: "MUHAMMAD ERWAN ZARKA", mtk: 78.00, ind: 79.60 },
-            { nisn: "0123456747", name: "NUR RAFNI YASMADI", mtk: 77.60, ind: 77.80 },
-            { nisn: "0123456748", name: "QIAN FERDINAND", mtk: 80.20, ind: 77.40 },
-            { nisn: "0123456749", name: "RAISA IDADI", mtk: 78.80, ind: 85.20 },
-            { nisn: "0123456750", name: "RISKA SARI", mtk: 78.00, ind: 78.00 },
-            { nisn: "0123456751", name: "SABRINA EMBUN PERTIWI", mtk: 77.60, ind: 78.60 },
-            { nisn: "0123456752", name: "SAPINAH", mtk: 78.80, ind: 81.40 },
-            { nisn: "0123456753", name: "SHAZIA ZARA ALISHA", mtk: 79.40, ind: 83.00 },
-            { nisn: "0123456754", name: "SUHARAYAH", mtk: 85.00, ind: 79.60 },
-            { nisn: "0123456755", name: "SYARIFAH NAJWA SAFIZ", mtk: 79.00, ind: 86.20 },
-            { nisn: "0123456756", name: "SYARIFAH ZILFA NATASYA", mtk: 80.40, ind: 84.00 },
-            { nisn: "0123456757", name: "SYIFA SYAQIRAH", mtk: 78.40, ind: 81.20 },
-            { nisn: "0123456758", name: "VANDERSAR MEICHAEL NAINGGOLAN", mtk: 77.80, ind: 78.00 },
-            { nisn: "0123456759", name: "ZAI ISRAKMIDIAH", mtk: 79.40, ind: 80.00 },
-            { nisn: "0123456760", name: "ACHAI ANDREAS", mtk: 77.80, ind: 80.40 },
-            { nisn: "0123456761", name: "ANGGARA PRATAMA", mtk: 77.40, ind: 76.20 },
-            { nisn: "0123456762", name: "ANUGRAH AGUSTI RAMADHANI", mtk: 83.20, ind: 82.60 },
-            { nisn: "0123456763", name: "ARFA", mtk: 76.40, ind: 76.20 },
-            { nisn: "0123456764", name: "DZAKIYYA NAILA SAKHI", mtk: 86.40, ind: 88.80 },
-            { nisn: "0123456765", name: "ERINA NAZIRA", mtk: 80.00, ind: 78.60 },
-            { nisn: "0123456766", name: "FAIZ FAYZUL HAQ", mtk: 78.00, ind: 78.40 },
-            { nisn: "0123456767", name: "HANY BAZLINDA", mtk: 88.40, ind: 90.00 },
-            { nisn: "0123456768", name: "HERISUSANTI", mtk: 88.80, ind: 92.20 },
-            { nisn: "0123456769", name: "HESTY YOLANDA SIRABANG", mtk: 73.40, ind: 78.00 },
-            { nisn: "0123456770", name: "MAHARANI DEWI", mtk: 86.60, ind: 89.80 },
-            { nisn: "0123456771", name: "MEGAWATI", mtk: 79.80, ind: 78.60 },
-            { nisn: "0123456772", name: "MULHUDA", mtk: 79.00, ind: 78.60 },
-            { nisn: "0123456773", name: "NAZILA MAHARANI", mtk: 78.60, ind: 81.60 },
-            { nisn: "0123456774", name: "NAZRIEL ALFARIZQY YUNIAR", mtk: 88.40, ind: 93.20 },
-            { nisn: "0123456775", name: "NI'A ROSA", mtk: 78.00, ind: 78.80 },
-            { nisn: "0123456776", name: "NOVITA ADHA RIAH", mtk: 79.80, ind: 80.40 },
-            { nisn: "0123456777", name: "NOVRIAN SAPUTRA", mtk: 80.20, ind: 77.40 },
-            { nisn: "0123456778", name: "RAHMANDA PRATAMA", mtk: 76.40, ind: 76.20 },
-            { nisn: "0123456779", name: "RISKY ARDIAN MISKA SACHPUTRA", mtk: 75.80, ind: 76.80 },
-            { nisn: "0123456780", name: "RIZKA ALFIA AZ ZAHRA", mtk: 86.00, ind: 90.60 },
-            { nisn: "0123456781", name: "SAHRINI RAMADANI", mtk: 76.80, ind: 76.80 },
-            { nisn: "0123456782", name: "SILVIA FRANSISKA NATALIA", mtk: 78.80, ind: 77.40 },
-            { nisn: "0123456783", name: "SUCI SAFIRA PUTRI", mtk: 87.00, ind: 80.80 },
-            { nisn: "0123456784", name: "SYARIFAH IZZATI AQILA", mtk: 86.40, ind: 78.00 },
-            { nisn: "0123456785", name: "USMAN", mtk: 75.60, ind: 76.20 },
-            { nisn: "0123456786", name: "WINDA AULIA", mtk: 77.20, ind: 78.00 },
-            { nisn: "0123456787", name: "ZIFARA OKTIA GISKA", mtk: 83.80, ind: 80.40 },
-            { nisn: "0123456788", name: "ZURRIATI FARHANA", mtk: 79.60, ind: 81.00 }
+            { name: "ADELIA DWI NURMANSYAH", mtk: 89.60, ind: 89.00 },
+            { name: "ANANDA IBNU FAHREZI", mtk: 78.20, ind: 79.60 },
+            { name: "DAFITRA ARIANSYAH", mtk: 76.60, ind: 76.80 },
+            { name: "DELVRY ANGGARA PANJAITAN", mtk: 83.20, ind: 84.00 },
+            { name: "DYRA ALTHA FUNISYA", mtk: 92.20, ind: 92.20 },
+            { name: "FAQIHA TAZKIATUN NUFUS", mtk: 81.80, ind: 80.20 },
+            { name: "GHASTAN GAUTAMA GINARDA", mtk: 85.00, ind: 92.60 },
+            { name: "JEANTRIKA SAPUTERA", mtk: 79.00, ind: 78.00 },
+            { name: "LIYANA ZAHIRA", mtk: 78.00, ind: 80.80 },
+            { name: "M.BAYU RIZKITULLAH", mtk: 84.60, ind: 82.40 },
+            { name: "MARWA DWI RAMADANI", mtk: 78.80, ind: 86.80 },
+            { name: "MUHAMMAD FADHIL ARDIANSYAH", mtk: 83.20, ind: 81.80 },
+            { name: "MUHAMMAD GIBRAN ASSYAFAR", mtk: 78.00, ind: 82.00 },
+            { name: "MUHAMMAD MUFLIH HIBATULLAH", mtk: 77.80, ind: 76.20 },
+            { name: "NATASYA ZULHAFIFAH", mtk: 82.20, ind: 86.40 },
+            { name: "RAFADIL ANANTA", mtk: 73.00, ind: 75.60 },
+            { name: "RAJA FATHUR ABDILLAH", mtk: 83.80, ind: 82.00 },
+            { name: "RATI JUNILA", mtk: 77.00, ind: 82.40 },
+            { name: "REFAN PINANDO", mtk: 77.60, ind: 76.20 },
+            { name: "RINA RIYANTI", mtk: 86.20, ind: 85.60 },
+            { name: "RISNA ULKA ARYANI", mtk: 81.40, ind: 77.80 },
+            { name: "RIZKA INDRI ADELIASA", mtk: 82.00, ind: 77.40 },
+            { name: "SHERIL GIANDA UTAMI", mtk: 78.00, ind: 77.20 },
+            { name: "SILA ADELIA", mtk: 77.60, ind: 77.80 },
+            { name: "SUKMASARI", mtk: 81.40, ind: 83.60 },
+            { name: "SYARIFAH NAFIA SAFIZ", mtk: 80.80, ind: 90.00 },
+            { name: "VIKY ADITYA SYAPUTRA", mtk: 77.80, ind: 76.20 },
+            { name: "ZALFA MUFIDAH INAYAH", mtk: 85.20, ind: 83.40 },
+            { name: "ΖΑΤΙΑ ΜAYSYA", mtk: 91.60, ind: 87.20 },
+            { name: "ADONIA NAJLA RAISSA", mtk: 81.40, ind: 82.80 },
+            { name: "AIRIN DWI RAMADHANI", mtk: 83.00, ind: 87.40 },
+            { name: "AISH GHAZIYA RAFIFA", mtk: 80.40, ind: 81.60 },
+            { name: "ARYA IMAM RISNANDA", mtk: 78.20, ind: 78.60 },
+            { name: "DEBY SEPTIANI", mtk: 90.20, ind: 88.80 },
+            { name: "DZIKRI HARITH HAZIQ", mtk: 79.60, ind: 80.20 },
+            { name: "GUNAWAN FAUZI", mtk: 76.80, ind: 76.20 },
+            { name: "IBNU SHALIM", mtk: 81.40, ind: 76.80 },
+            { name: "IMAM SYAHIBBULLAH", mtk: 76.20, ind: 77.20 },
+            { name: "IRVAN KURNIA", mtk: 77.80, ind: 79.80 },
+            { name: "ISNAINI", mtk: 80.60, ind: 76.80 },
+            { name: "KAFHA AZRI ILHAMSYAH", mtk: 76.00, ind: 76.60 },
+            { name: "KHASBI NOVALDI", mtk: 74.20, ind: 76.80 },
+            { name: "LIPIANA SUCI RAMARANI", mtk: 87.60, ind: 87.80 },
+            { name: "MECA ADELYA CAHYANI", mtk: 85.80, ind: 93.00 },
+            { name: "MEISYA AWALUN NURHASANAH", mtk: 77.40, ind: 77.40 },
+            { name: "MUHAMMAD ERWAN ZARKA", mtk: 78.00, ind: 79.60 },
+            { name: "NUR RAFNI YASMADI", mtk: 77.60, ind: 77.80 },
+            { name: "QIAN FERDINAND", mtk: 80.20, ind: 77.40 },
+            { name: "RAISA IDADI", mtk: 78.80, ind: 85.20 },
+            { name: "RISKA SARI", mtk: 78.00, ind: 78.00 },
+            { name: "SABRINA EMBUN PERTIWI", mtk: 77.60, ind: 78.60 },
+            { name: "SAPINAH", mtk: 78.80, ind: 81.40 },
+            { name: "SHAZIA ZARA ALISHA", mtk: 79.40, ind: 83.00 },
+            { name: "SUHARAYAH", mtk: 85.00, ind: 79.60 },
+            { name: "SYARIFAH NAJWA SAFIZ", mtk: 79.00, ind: 86.20 },
+            { name: "SYARIFAH ZILFA NATASYA", mtk: 80.40, ind: 84.00 },
+            { name: "SYIFA SYAQIRAH", mtk: 78.40, ind: 81.20 },
+            { name: "VANDERSAR MEICHAEL NAINGGOLAN", mtk: 77.80, ind: 78.00 },
+            { name: "ZAI ISRAKMIDIAH", mtk: 79.40, ind: 80.00 },
+            { name: "ACHAI ANDREAS", mtk: 77.80, ind: 80.40 },
+            { name: "ANGGARA PRATAMA", mtk: 77.40, ind: 76.20 },
+            { name: "ANUGRAH AGUSTI RAMADHANI", mtk: 83.20, ind: 82.60 },
+            { name: "ARFA", mtk: 76.40, ind: 76.20 },
+            { name: "DZAKIYYA NAILA SAKHI", mtk: 86.40, ind: 88.80 },
+            { name: "ERINA NAZIRA", mtk: 80.00, ind: 78.60 },
+            { name: "FAIZ FAYZUL HAQ", mtk: 78.00, ind: 78.40 },
+            { name: "HANY BAZLINDA", mtk: 88.40, ind: 90.00 },
+            { name: "HERISUSANTI", mtk: 88.80, ind: 92.20 },
+            { name: "HESTY YOLANDA SIRABANG", mtk: 73.40, ind: 78.00 },
+            { name: "MAHARANI DEWI", mtk: 86.60, ind: 89.80 },
+            { name: "MEGAWATI", mtk: 79.80, ind: 78.60 },
+            { name: "MULHUDA", mtk: 79.00, ind: 78.60 },
+            { name: "NAZILA MAHARANI", mtk: 78.60, ind: 81.60 },
+            { name: "NAZRIEL ALFARIZQY YUNIAR", mtk: 88.40, ind: 93.20 },
+            { name: "NI'A ROSA", mtk: 78.00, ind: 78.80 },
+            { name: "NOVITA ADHA RIAH", mtk: 79.80, ind: 80.40 },
+            { name: "NOVRIAN SAPUTRA", mtk: 80.20, ind: 77.40 },
+            { name: "RAHMANDA PRATAMA", mtk: 76.40, ind: 76.20 },
+            { name: "RISKY ARDIAN MISKA SACHPUTRA", mtk: 75.80, ind: 76.80 },
+            { name: "RIZKA ALFIA AZ ZAHRA", mtk: 86.00, ind: 90.60 },
+            { name: "SAHRINI RAMADANI", mtk: 76.80, ind: 76.80 },
+            { name: "SILVIA FRANSISKA NATALIA", mtk: 78.80, ind: 77.40 },
+            { name: "SUCI SAFIRA PUTRI", mtk: 87.00, ind: 80.80 },
+            { name: "SYARIFAH IZZATI AQILA", mtk: 86.40, ind: 78.00 },
+            { name: "USMAN", mtk: 75.60, ind: 76.20 },
+            { name: "WINDA AULIA", mtk: 77.20, ind: 78.00 },
+            { name: "ZIFARA OKTIA GISKA", mtk: 83.80, ind: 80.40 },
+            { name: "ZURRIATI FARHANA", mtk: 79.60, ind: 81.00 }
         ];
 
         let processedStudents = [];
@@ -622,8 +618,7 @@
                 totalMtk += s.mtk;
                 totalInd += s.ind;
                 return {
-                    nisn: s.nisn,
-                    name: s.name,
+                    name: s.name.toUpperCase().trim(),
                     mtk: s.mtk,
                     ind: s.ind,
                     combinedAvg: avg
@@ -700,15 +695,15 @@
             }
         }
 
-        // --- LOGIKA PENCARIAN & VALIDASI NISN (10 DIGIT) ---
+        // --- LOGIKA PENCARIAN BERDASARKAN NAMA LENGKAP ---
         function processSearch() {
-            const inputVal = document.getElementById('student-search-input').value.trim();
+            const inputVal = document.getElementById('student-search-input').value.toUpperCase().trim();
             const resultContainer = document.getElementById('result-container');
             const loadingBox = document.getElementById('loading-box');
 
-            // Validasi format wajib 10 digit angka
-            if (inputVal.length !== 10 || isNaN(inputVal)) {
-                alert("Akses Ditolak! Harap masukkan 10 digit NISN resmi Anda dengan benar.");
+            // Validasi input tidak boleh kosong
+            if (inputVal === "") {
+                alert("Harap masukkan nama lengkap siswa untuk melakukan pencarian.");
                 return;
             }
 
@@ -718,15 +713,15 @@
             setTimeout(() => {
                 loadingBox.style.display = "none";
 
-                // Pencocokan data berdasarkan variabel NISN spesifik
-                const matchStudent = processedStudents.find(s => s.nisn === inputVal);
+                // Pencocokan data berdasarkan Variabel Nama Lengkap
+                const matchStudent = processedStudents.find(s => s.name === inputVal);
 
                 if(!matchStudent) {
                     resultContainer.innerHTML = `
                         <div class="m3-glass bounce-effect" style="text-align:center; padding: 30px 20px;">
-                            <i class="fa-solid fa-user-shield" style="font-size:32px; color:#f43f5e; margin-bottom:12px;"></i>
-                            <h3 style="font-size:15px; color:#334155;">NISN Tidak Terdaftar</h3>
-                            <p style="font-size:12px; color:#64748b; margin-top:4px;">Silakan periksa kembali kartu pelajar atau hubungi wali kelas.</p>
+                            <i class="fa-solid fa-user-slash" style="font-size:32px; color:#f43f5e; margin-bottom:12px;"></i>
+                            <h3 style="font-size:15px; color:#334155;">Nama Siswa Tidak Ditemukan</h3>
+                            <p style="font-size:12px; color:#64748b; margin-top:4px;">Pastikan penulisan nama lengkap sudah benar dan sesuai dengan data sekolah.</p>
                         </div>
                     `;
                 } else {
@@ -760,7 +755,7 @@
                             <div class="student-profile">
                                 <div class="profile-info">
                                     <h2>${matchStudent.name}</h2>
-                                    <p>NISN: ${matchStudent.nisn}</p>
+                                    <p>Siswa SMP Negeri 1 Lingga</p>
                                 </div>
                                 <div class="rank-badge ${badgeClass}">
                                     ${badgeIcon}<span>${badgeText}</span>
@@ -792,12 +787,12 @@
                             <div class="skl-announcement">
                                 <div class="skl-title">
                                     <i class="fa-solid fa-circle-info"></i>
-                                    <span>AGENDA PENTING KELULUSAN</span>
+                                    <span>INFORMASI PENGAMBILAN SKL & RAPOR</span>
                                 </div>
                                 <ul class="skl-details">
                                     <li>
                                         <i class="fa-solid fa-calendar-day"></i>
-                                        <span><strong>Hari/Tanggal:</strong> Sabtu, 6 Juni 2026</span>
+                                        <span><strong>Hari / Tanggal:</strong> Sabtu, 6 Juni 2026</span>
                                     </li>
                                     <li>
                                         <i class="fa-solid fa-clock"></i>
@@ -805,10 +800,7 @@
                                     </li>
                                     <li>
                                         <i class="fa-solid fa-location-dot"></i>
-                                        <span><strong>Tempat:</strong> Ruang TU SMP Negeri 1 Lingga</span>
-                                    </li>
-                                    <li style="margin-top:4px; font-style:italic; color:#9a3412;">
-                                        <span>*Pengambilan wajib didampingi Orang Tua/Wali Murid dengan pakaian rapi.</span>
+                                        <span><strong>Tempat:</strong> TU SMP Negeri 1 Lingga</span>
                                     </li>
                                 </ul>
                             </div>
