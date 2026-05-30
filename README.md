@@ -22,6 +22,8 @@
             align-items: flex-start;
             min-height: 100vh;
             padding-bottom: 90px; /* Jarak aman agar tidak tertutup bottom navbar */
+            position: relative;
+            overflow-x: hidden;
         }
 
         /* --- MOBILE CONTAINER (MAX 440px) --- */
@@ -32,6 +34,8 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+            position: relative;
+            z-index: 10; /* Berada di atas lapisan bintang */
         }
 
         /* --- UI GLASSMORPHISM COMPONENT (MATERIAL 3) --- */
@@ -368,7 +372,7 @@
             font-size: 15px;
         }
 
-        /* --- KOTAK INFO PENGAMBILAN SKL & RAPOR --- */
+        /* --- KOTAK INFO PENGAMBILAN SKL & SIMULASI --- */
         .skl-announcement {
             background: #fff7ed;
             border: 1px dashed #f97316;
@@ -377,7 +381,12 @@
             margin-top: 4px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 12px;
+        }
+        .skl-block {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
         }
         .skl-title {
             font-size: 13px;
@@ -386,6 +395,8 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            border-bottom: 1px dashed rgba(249, 115, 22, 0.2);
+            padding-bottom: 4px;
         }
         .skl-details {
             font-size: 12px;
@@ -402,6 +413,8 @@
         .skl-details i {
             margin-top: 3px;
             font-size: 10px;
+            width: 12px;
+            text-align: center;
         }
 
         /* --- FIXED BOTTOM NAVBAR --- */
@@ -446,9 +459,48 @@
         .nav-item.active {
             color: #1d4ed8;
         }
+
+        /* --- EFEK VISUAL ANIMASI BINTANG KEJORA --- */
+        .star-field-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none; /* Klik tembus ke elemen di bawahnya */
+            z-index: 1;
+            overflow: hidden;
+            display: none;
+        }
+        .kejora-star {
+            position: absolute;
+            color: #f59e0b; /* Warna Kuning Emas Bintang */
+            filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.9));
+            opacity: 0;
+            animation: flashAndFly 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+        @keyframes flashAndFly {
+            0% {
+                transform: scale(0.2) translate(0, 0) rotate(0deg);
+                opacity: 0;
+            }
+            15% {
+                opacity: 1;
+                transform: scale(1.2) translate(10px, -15px) rotate(45deg);
+            }
+            85% {
+                opacity: 0.9;
+            }
+            100% {
+                transform: scale(0.3) translate(40px, -80px) rotate(180deg);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
+
+    <div class="star-field-overlay" id="kejora-overlay"></div>
 
     <div class="container-mobile">
         <div class="app-header">
@@ -609,7 +661,6 @@
         let processedStudents = [];
         let classStatistics = { mtk: { avg: 0, baik: 0, memadai: 0, kurang: 0 }, ind: { avg: 0, baik: 0, memadai: 0, kurang: 0 } };
 
-        // FUNGSI UTAMA UNTUK PROSES LOGIKA DATA & URUTAN PERINGKAT
         function initData() {
             let totalMtk = 0, totalInd = 0;
             
@@ -625,7 +676,6 @@
                 };
             });
 
-            // Urutkan dari rata-rata tertinggi ke terendah
             calculated.sort((a, b) => b.combinedAvg - a.combinedAvg);
             
             processedStudents = calculated.map((item, idx) => {
@@ -695,13 +745,42 @@
             }
         }
 
-        // --- LOGIKA PENCARIAN BERDASARKAN NAMA LENGKAP ---
+        // --- TRIGGER ANIMASI BINTANG KEJORA BERKERLAP-KERLIP ---
+        function triggerKejoraEffect() {
+            const overlay = document.getElementById('kejora-overlay');
+            overlay.innerHTML = ""; // Bersihkan bintang lama
+            overlay.style.display = "block";
+
+            // Generate 35 Bintang Kejora secara acak di layar gadget
+            for (let i = 0; i < 35; i++) {
+                const star = document.createElement('i');
+                star.className = "fa-solid fa-star kejora-star";
+                
+                // Tata letak acak (X dan Y)
+                const randomLeft = Math.random() * 100;
+                const randomTop = Math.random() * 100;
+                const randomSize = Math.random() * 14 + 8; // Ukuran bervariasi antara 8px - 22px
+                const randomDelay = Math.random() * 0.8; // Penundaan waktu muncul acak
+
+                star.style.left = `${randomLeft}vw`;
+                star.style.top = `${randomTop}vh`;
+                star.style.fontSize = `${randomSize}px`;
+                star.style.animationDelay = `${randomDelay}s`;
+
+                overlay.appendChild(star);
+            }
+
+            // Sembunyikan kontainer overlay setelah seluruh animasi selesai (2.5s + 0.8s)
+            setTimeout(() => {
+                overlay.style.display = "none";
+            }, 3500);
+        }
+
         function processSearch() {
             const inputVal = document.getElementById('student-search-input').value.toUpperCase().trim();
             const resultContainer = document.getElementById('result-container');
             const loadingBox = document.getElementById('loading-box');
 
-            // Validasi input tidak boleh kosong
             if (inputVal === "") {
                 alert("Harap masukkan nama lengkap siswa untuk melakukan pencarian.");
                 return;
@@ -713,7 +792,6 @@
             setTimeout(() => {
                 loadingBox.style.display = "none";
 
-                // Pencocokan data berdasarkan Variabel Nama Lengkap
                 const matchStudent = processedStudents.find(s => s.name === inputVal);
 
                 if(!matchStudent) {
@@ -725,6 +803,9 @@
                         </div>
                     `;
                 } else {
+                    // PANGGIL ANIMASI BINTANG KEJORA KARENA SISWA BERHASIL DITEMUKAN
+                    triggerKejoraEffect();
+
                     let cardClass = 'card-rank-normal';
                     let badgeClass = 'badge-normal';
                     let badgeIcon = '<i class="fa-solid fa-hashtag"></i>';
@@ -785,24 +866,51 @@
                             </div>
 
                             <div class="skl-announcement">
-                                <div class="skl-title">
-                                    <i class="fa-solid fa-circle-info"></i>
-                                    <span>INFORMASI PENGAMBILAN SKL & RAPOR</span>
+                                <div class="skl-block">
+                                    <div class="skl-title">
+                                        <i class="fa-solid fa-circle-info"></i>
+                                        <span>INFORMASI PENGAMBILAN SKL & RAPOR</span>
+                                    </div>
+                                    <ul class="skl-details">
+                                        <li>
+                                            <i class="fa-solid fa-calendar-day"></i>
+                                            <span><strong>Hari / Tanggal:</strong> Sabtu, 6 Juni 2026</span>
+                                        </li>
+                                        <li>
+                                            <i class="fa-solid fa-clock"></i>
+                                            <span><strong>Waktu:</strong> Jam 09.00 WIB</span>
+                                        </li>
+                                        <li>
+                                            <i class="fa-solid fa-location-dot"></i>
+                                            <span><strong>Tempat:</strong> TU SMP Negeri 1 Lingga</span>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <ul class="skl-details">
-                                    <li>
-                                        <i class="fa-solid fa-calendar-day"></i>
-                                        <span><strong>Hari / Tanggal:</strong> Sabtu, 6 Juni 2026</span>
-                                    </li>
-                                    <li>
-                                        <i class="fa-solid fa-clock"></i>
-                                        <span><strong>Waktu:</strong> Jam 09.00 WIB</span>
-                                    </li>
-                                    <li>
-                                        <i class="fa-solid fa-location-dot"></i>
-                                        <span><strong>Tempat:</strong> TU SMP Negeri 1 Lingga</span>
-                                    </li>
-                                </ul>
+
+                                <div class="skl-block">
+                                    <div class="skl-title" style="color: #1e3a8a; border-color: rgba(59, 130, 246, 0.2);">
+                                        <i class="fa-solid fa-laptop-code" style="color: #2563eb;"></i>
+                                        <span style="color: #1d4ed8;">SIMULASI PENDAFTARAN KE SMA</span>
+                                    </div>
+                                    <ul class="skl-details" style="color: #2563eb;">
+                                        <li>
+                                            <i class="fa-solid fa-calendar-day"></i>
+                                            <span><strong>Hari / Tanggal:</strong> Senin, 8 Juni 2026</span>
+                                        </li>
+                                        <li>
+                                            <i class="fa-solid fa-clock"></i>
+                                            <span><strong>Waktu:</strong> Jam 09.00 WIB</span>
+                                        </li>
+                                        <li>
+                                            <i class="fa-solid fa-globe"></i>
+                                            <span><strong>Metode:</strong> Daring (Online)</span>
+                                        </li>
+                                        <li>
+                                            <i class="fa-brands fa-whatsapp" style="color: #25d366; font-size: 12px;"></i>
+                                            <span><em>Info selanjutnya akan diumumkan di Grup WA</em></span>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     `;
