@@ -723,7 +723,7 @@
                                     </div>
                                     <ul class="skl-details" style="color: #2563eb;">
                                         <li><i class="fa-solid fa-calendar-day"></i><span><strong>Tanggal:</strong> 2 s/d 3 Juni 2026</span></li>
-                                        <li><i class="fa-solid fa-clock"></i><span><strong>Waktu:</strong> Website SPMB : sispmb.kepriprov.go.id</span></li>
+                                        <li><i class="fa-solid fa-clock"></i><span><strong>Website SPMB SMA/SMK:</strong>sispmb.kepriprov.go.id</span></li>
                                         <li><i class="fa-solid fa-globe"></i><span><strong>Metode:</strong> Daring (Online)</span></li>
                                         <li><i class="fa-brands fa-whatsapp" style="color: #25d366; font-size: 12px;"></i><span><em>Info selanjutnya silahkan hubungi Panitia SPMB SMA/SMK</em></span></li>
                                     </ul>
