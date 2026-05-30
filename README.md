@@ -707,13 +707,13 @@
                                 <div class="skl-block">
                                     <div class="skl-title" style="color: #1e3a8a; border-color: rgba(59, 130, 246, 0.2);">
                                         <i class="fa-solid fa-laptop-code" style="color: #2563eb;"></i>
-                                        <span style="color: #1d4ed8;">UJICOBA APLIKASI SPMB SMA</span>
+                                        <span style="color: #1d4ed8;">UJICOBA APLIKASI SPMB SMA/SMK</span>
                                     </div>
                                     <ul class="skl-details" style="color: #2563eb;">
                                         <li><i class="fa-solid fa-calendar-day"></i><span><strong>Tanggal:</strong> 2 s/d 3 Juni 2026</span></li>
                                         <li><i class="fa-solid fa-clock"></i><span><strong>Website:</strong> sispmb.kepriprov.go.id</span></li>
                                         <li><i class="fa-solid fa-globe"></i><span><strong>Metode:</strong> Daring (Online)</span></li>
-                                        <li><i class="fa-brands fa-whatsapp" style="color: #25d366; font-size: 12px;"></i><span><em>Info selanjutnya silahhkan ke WA Panitia SPMB SMA/SMK</em></span></li>
+                                        <li><i class="fa-brands fa-whatsapp" style="color: #25d366; font-size: 12px;"></i><span><em>Info selanjutnya silahkan hubungi Panitia SPMB SMA/SMK</em></span></li>
                                     </ul>
                                 </div>
                             </div>
