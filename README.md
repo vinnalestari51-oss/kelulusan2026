@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amplop Nilai Digital - SMP Negeri 1 Lingga</title>
+    <title>Amplop Nilai Kelulusan - SMP Negeri 1 Lingga</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         /* --- RESET & GLOBAL STYLES --- */
@@ -409,7 +409,7 @@
     <div class="container-mobile">
         <div class="app-header">
             <h1>SMP NEGERI 1 LINGGA</h1>
-            <p>Sistem Pengumuman Nilai Akhir TP 2025/2026</p>
+            <p>Pengumuman Kelulusan Kelas IX TP. 2025/2026</p>
         </div>
 
         <div id="page-home" class="tab-content">
@@ -425,7 +425,7 @@
                 <label for="student-search-input">Masukkan Nama Lengkap Siswa</label>
                 <div class="input-wrapper">
                     <i class="fa-solid fa-user"></i>
-                    <input type="text" id="student-search-input" placeholder="Contoh: ADELIA DWI NURMANSYAH..." autocomplete="off">
+                    <input type="text" id="student-search-input" placeholder="Contoh: RAYYA ATHIYAH HANIFAA..." autocomplete="off">
                 </div>
                 <button class="btn-search" onclick="processSearch()"><i class="fa-solid fa-envelope-open-text"></i>Buka Amplop Nilai</button>
             </div>
@@ -719,13 +719,13 @@
                                 <div class="skl-block">
                                     <div class="skl-title" style="color: #1e3a8a; border-color: rgba(59, 130, 246, 0.2);">
                                         <i class="fa-solid fa-laptop-code" style="color: #2563eb;"></i>
-                                        <span style="color: #1d4ed8;">SIMULASI PENDAFTARAN KE SMA</span>
+                                        <span style="color: #1d4ed8;">SIMULASI PENDAFTARAN SPMB SMA/SMK</span>
                                     </div>
                                     <ul class="skl-details" style="color: #2563eb;">
-                                        <li><i class="fa-solid fa-calendar-day"></i><span><strong>Hari / Tanggal:</strong> Senin, 8 Juni 2026</span></li>
-                                        <li><i class="fa-solid fa-clock"></i><span><strong>Waktu:</strong> Jam 09.00 WIB</span></li>
+                                        <li><i class="fa-solid fa-calendar-day"></i><span><strong>Tanggal:</strong> 2 s/d 3 Juni 2026</span></li>
+                                        <li><i class="fa-solid fa-clock"></i><span><strong>Waktu:</strong> Website SPMB : sispmb.kepriprov.go.id</span></li>
                                         <li><i class="fa-solid fa-globe"></i><span><strong>Metode:</strong> Daring (Online)</span></li>
-                                        <li><i class="fa-brands fa-whatsapp" style="color: #25d366; font-size: 12px;"></i><span><em>Info selanjutnya akan diumumkan di Grup WA</em></span></li>
+                                        <li><i class="fa-brands fa-whatsapp" style="color: #25d366; font-size: 12px;"></i><span><em>Info selanjutnya silahkan hubungi Panitia SPMB SMA/SMK</em></span></li>
                                     </ul>
                                 </div>
                             </div>
