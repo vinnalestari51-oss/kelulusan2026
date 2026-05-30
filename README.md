@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amplop Nilai Digital - SMP Negeri 1 Lingga</title>
+    <title>Amplop Nilai Kelulusan - SMP Negeri 1 Lingga</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         /* --- RESET & GLOBAL STYLES --- */
@@ -401,7 +401,7 @@
     <div class="container-mobile">
         <div class="app-header">
             <h1>SMP NEGERI 1 LINGGA</h1>
-            <p>Sistem Pengumuman Nilai Akhir TP 2025/2026</p>
+            <p>Pengumuman Kelulusan Siswa Kelas IX TP. 2025/2026</p>
         </div>
 
         <div id="page-home" class="tab-content">
@@ -417,14 +417,14 @@
                 <label for="student-search-input">Masukkan Nama Lengkap Siswa</label>
                 <div class="input-wrapper">
                     <i class="fa-solid fa-user"></i>
-                    <input type="text" id="student-search-input" placeholder="Contoh: ADELIA DWI NURMANSYAH..." autocomplete="off">
+                    <input type="text" id="student-search-input" placeholder="Contoh: RAYYA ATHIYAH HANIFAA..." autocomplete="off">
                 </div>
                 <button class="btn-search" onclick="processSearch()"><i class="fa-solid fa-envelope-open-text"></i>Buka Amplop Nilai</button>
             </div>
 
             <div class="loading-container" id="loading-box">
                 <div class="spinner"></div>
-                <span class="pulse-text">Membuka Amplop Dokumen...</span>
+                <span class="pulse-text">Membuka Amplop Nilai...</span>
             </div>
 
             <div id="result-container">
