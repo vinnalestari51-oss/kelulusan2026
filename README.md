@@ -22,8 +22,6 @@
             align-items: flex-start;
             min-height: 100vh;
             padding-bottom: 90px; /* Jarak aman agar tidak tertutup bottom navbar */
-            position: relative;
-            overflow-x: hidden;
         }
 
         /* --- MOBILE CONTAINER (MAX 440px) --- */
@@ -34,8 +32,6 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
-            position: relative;
-            z-index: 10; /* Berada di atas lapisan bintang */
         }
 
         /* --- UI GLASSMORPHISM COMPONENT (MATERIAL 3) --- */
@@ -459,48 +455,9 @@
         .nav-item.active {
             color: #1d4ed8;
         }
-
-        /* --- EFEK VISUAL ANIMASI BINTANG KEJORA --- */
-        .star-field-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none; /* Klik tembus ke elemen di bawahnya */
-            z-index: 1;
-            overflow: hidden;
-            display: none;
-        }
-        .kejora-star {
-            position: absolute;
-            color: #f59e0b; /* Warna Kuning Emas Bintang */
-            filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.9));
-            opacity: 0;
-            animation: flashAndFly 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-        }
-        @keyframes flashAndFly {
-            0% {
-                transform: scale(0.2) translate(0, 0) rotate(0deg);
-                opacity: 0;
-            }
-            15% {
-                opacity: 1;
-                transform: scale(1.2) translate(10px, -15px) rotate(45deg);
-            }
-            85% {
-                opacity: 0.9;
-            }
-            100% {
-                transform: scale(0.3) translate(40px, -80px) rotate(180deg);
-                opacity: 0;
-            }
-        }
     </style>
 </head>
 <body>
-
-    <div class="star-field-overlay" id="kejora-overlay"></div>
 
     <div class="container-mobile">
         <div class="app-header">
@@ -745,37 +702,6 @@
             }
         }
 
-        // --- TRIGGER ANIMASI BINTANG KEJORA BERKERLAP-KERLIP ---
-        function triggerKejoraEffect() {
-            const overlay = document.getElementById('kejora-overlay');
-            overlay.innerHTML = ""; // Bersihkan bintang lama
-            overlay.style.display = "block";
-
-            // Generate 35 Bintang Kejora secara acak di layar gadget
-            for (let i = 0; i < 35; i++) {
-                const star = document.createElement('i');
-                star.className = "fa-solid fa-star kejora-star";
-                
-                // Tata letak acak (X dan Y)
-                const randomLeft = Math.random() * 100;
-                const randomTop = Math.random() * 100;
-                const randomSize = Math.random() * 14 + 8; // Ukuran bervariasi antara 8px - 22px
-                const randomDelay = Math.random() * 0.8; // Penundaan waktu muncul acak
-
-                star.style.left = `${randomLeft}vw`;
-                star.style.top = `${randomTop}vh`;
-                star.style.fontSize = `${randomSize}px`;
-                star.style.animationDelay = `${randomDelay}s`;
-
-                overlay.appendChild(star);
-            }
-
-            // Sembunyikan kontainer overlay setelah seluruh animasi selesai (2.5s + 0.8s)
-            setTimeout(() => {
-                overlay.style.display = "none";
-            }, 3500);
-        }
-
         function processSearch() {
             const inputVal = document.getElementById('student-search-input').value.toUpperCase().trim();
             const resultContainer = document.getElementById('result-container');
@@ -803,9 +729,6 @@
                         </div>
                     `;
                 } else {
-                    // PANGGIL ANIMASI BINTANG KEJORA KARENA SISWA BERHASIL DITEMUKAN
-                    triggerKejoraEffect();
-
                     let cardClass = 'card-rank-normal';
                     let badgeClass = 'badge-normal';
                     let badgeIcon = '<i class="fa-solid fa-hashtag"></i>';
