@@ -15,13 +15,15 @@
         }
 
         body {
-            background-color: #f0f7ff; /* Biru tipis, super lembut & bersih */
+            background-color: #f0f7ff;
             color: #1e293b;
             display: flex;
             justify-content: center;
             align-items: flex-start;
             min-height: 100vh;
-            padding-bottom: 90px; /* Jarak aman agar tidak tertutup bottom navbar */
+            padding-bottom: 90px;
+            position: relative;
+            overflow-x: hidden;
         }
 
         /* --- MOBILE CONTAINER (MAX 440px) --- */
@@ -31,24 +33,26 @@
             padding: 20px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 16px;
+            position: relative;
+            z-index: 10;
         }
 
         /* --- UI GLASSMORPHISM COMPONENT (MATERIAL 3) --- */
         .m3-glass {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.9);
-            border-radius: 24px; /* Sudut melengkung Material 3 tegas */
-            padding: 24px;
+            border-radius: 24px;
+            padding: 20px;
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.04);
         }
 
         /* --- HEADER BRANDING --- */
         .app-header {
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 4px;
             padding-top: 10px;
         }
         .app-header h1 {
@@ -70,79 +74,35 @@
         .tab-content.active {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 16px;
         }
 
-        /* --- LAMAN 1: HOME (REKAPITULASI ANONIM) --- */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 8px;
-        }
-        .stat-box {
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 16px;
-            padding: 14px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.6);
-        }
-        .stat-box span {
-            font-size: 12px;
-            color: #64748b;
-            font-weight: 500;
-        }
-        .stat-box h3 {
-            font-size: 24px;
-            font-weight: 700;
-            color: #1e3a8a;
-            margin-top: 4px;
-        }
-        .chart-section {
-            margin-top: 10px;
-        }
-        .chart-section h4 {
-            font-size: 14px;
-            color: #334155;
-            margin-bottom: 12px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .chart-container {
+        /* --- LAMAN 1: HOME (RATA-RATA TIAP MAPEL) --- */
+        .subject-avg-grid {
             display: flex;
             flex-direction: column;
             gap: 10px;
-            margin-bottom: 20px;
+            margin-top: 8px;
         }
-        .chart-row {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-        .chart-label {
+        .subject-avg-card {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-radius: 14px;
+            padding: 12px 16px;
             display: flex;
             justify-content: space-between;
-            font-size: 11px;
-            font-weight: 500;
-            color: #64748b;
+            align-items: center;
         }
-        .bar-outer {
-            width: 100%;
-            height: 10px;
-            background: rgba(0, 0, 0, 0.04);
-            border-radius: 999px;
-            overflow: hidden;
+        .subject-avg-card span {
+            font-size: 13px;
+            font-weight: 600;
+            color: #475569;
         }
-        .bar-inner {
-            height: 100%;
-            border-radius: 999px;
-            transition: width 0.6s ease;
+        .subject-avg-card strong {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1d4ed8;
         }
-        .bg-baik { background: #10b981; }
-        .bg-memadai { background: #3b82f6; }
-        .bg-kurang { background: #f43f5e; }
 
         /* --- LAMAN 2: NILAIKU (PENCARIAN) --- */
         .search-box {
@@ -195,10 +155,6 @@
             align-items: center;
             gap: 10px;
             box-shadow: 0 4px 12px rgba(29, 78, 216, 0.2);
-            transition: background 0.2s;
-        }
-        .btn-search:active {
-            background: #1e40af;
         }
 
         /* --- LOADING SPINNER --- */
@@ -228,45 +184,33 @@
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
 
-        /* --- KARTU HASIL INDIVIDU & VARIASI JUARA --- */
+        /* --- KARTU HASIL INDIVIDU --- */
         #result-container {
             display: none;
         }
         .result-card {
             display: flex;
             flex-direction: column;
-            gap: 18px;
+            gap: 16px;
             position: relative;
             overflow: hidden;
         }
 
-        /* Rank 1 (Juara 1) */
         .card-rank-1 {
             background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%) !important;
             border: 2px solid #34d399 !important;
             box-shadow: 0 10px 25px rgba(52, 211, 153, 0.25) !important;
-            background-size: 200% 200%;
-            animation: shimmer 3s linear infinite;
         }
-        /* Rank 2 (Juara 2) */
         .card-rank-2 {
             background: linear-gradient(135deg, #dbaefe 0%, #bfdbfe 100%) !important;
             border: 1px solid #93c5fd !important;
         }
-        /* Rank 3 (Juara 3) */
         .card-rank-3 {
             background: linear-gradient(135deg, #ffedd5 0%, #fdbb74 100%) !important;
             border: 1px solid #f97316 !important;
         }
-        /* Rank 4 Ke Bawah */
         .card-rank-normal {
-            background: rgba(255, 255, 255, 0.85);
-        }
-
-        @keyframes shimmer {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            background: rgba(255, 255, 255, 0.9);
         }
 
         .bounce-effect {
@@ -274,8 +218,6 @@
         }
         @keyframes surpriseBounce {
             0% { transform: scale(0.3); opacity: 0; }
-            50% { transform: scale(1.05); }
-            70% { transform: scale(0.9); }
             100% { transform: scale(1); opacity: 1; }
         }
 
@@ -310,63 +252,41 @@
         .badge-3 { background: #ea580c; color: white; }
         .badge-normal { background: #64748b; color: white; }
 
-        /* Tata Letak Nilai Vertikal */
-        .score-rows-container {
+        /* TAMPILAN UTAMA RATA-RATA SISWA */
+        .single-score-container {
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 18px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.8);
             display: flex;
             flex-direction: column;
-            gap: 10px;
-        }
-        .score-row-item {
-            background: rgba(255, 255, 255, 0.4);
-            border-radius: 14px;
-            padding: 12px 16px;
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-            border: 1px solid rgba(255,255,255,0.5);
+            gap: 6px;
         }
-        .subject-meta {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 4px;
-        }
-        .subject-name {
-            font-size: 14px;
+        .single-score-label {
+            font-size: 13px;
             font-weight: 600;
-            color: #334155;
+            color: #475569;
+            letter-spacing: 0.5px;
         }
-        .tag-predikat {
-            font-size: 10px;
+        .single-score-number {
+            font-size: 48px;
+            font-weight: 900;
+            color: #1e3a8a;
+            line-height: 1;
+        }
+        .single-score-predikat {
+            font-size: 12px;
             font-weight: 700;
-            padding: 2px 8px;
-            border-radius: 6px;
-            width: auto;
+            padding: 4px 14px;
+            border-radius: 8px;
             text-transform: uppercase;
+            margin-top: 4px;
         }
         .tag-baik { background: #d1fae5; color: #065f46; }
         .tag-memadai { background: #dbeafe; color: #1e40af; }
         .tag-kurang { background: #ffe4e6; color: #991b1b; }
-        
-        .score-number {
-            font-size: 24px;
-            font-weight: 800;
-            color: #0f172a;
-        }
-
-        .card-footer-summary {
-            background: rgba(0, 0, 0, 0.03);
-            border-radius: 14px;
-            padding: 12px;
-            text-align: center;
-            font-size: 13px;
-            font-weight: 600;
-            color: #475569;
-        }
-        .card-footer-summary strong {
-            color: #1d4ed8;
-            font-size: 15px;
-        }
 
         /* --- KOTAK INFO PENGAMBILAN SKL & SIMULASI --- */
         .skl-announcement {
@@ -374,7 +294,6 @@
             border: 1px dashed #f97316;
             border-radius: 16px;
             padding: 16px;
-            margin-top: 4px;
             display: flex;
             flex-direction: column;
             gap: 12px;
@@ -443,50 +362,52 @@
             height: 100%;
             color: #94a3b8;
             cursor: pointer;
-            transition: color 0.2s;
         }
-        .nav-item i {
-            font-size: 18px;
+        .nav-item i { font-size: 18px; }
+        .nav-item span { font-size: 11px; font-weight: 600; }
+        .nav-item.active { color: #1d4ed8; }
+
+        /* --- EFEK VISUAL ANIMASI BINTANG KEJORA --- */
+        .star-field-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+            display: none;
         }
-        .nav-item span {
-            font-size: 11px;
-            font-weight: 600;
+        .kejora-star {
+            position: absolute;
+            color: #f59e0b;
+            filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.9));
+            opacity: 0;
+            animation: flashAndFly 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
         }
-        .nav-item.active {
-            color: #1d4ed8;
+        @keyframes flashAndFly {
+            0% { transform: scale(0.2) translate(0, 0) rotate(0deg); opacity: 0; }
+            15% { opacity: 1; transform: scale(1.2) translate(10px, -15px) rotate(45deg); }
+            85% { opacity: 0.9; }
+            100% { transform: scale(0.3) translate(40px, -80px) rotate(180deg); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
+    <div class="star-field-overlay" id="kejora-overlay"></div>
+
     <div class="container-mobile">
         <div class="app-header">
             <h1>SMP NEGERI 1 LINGGA</h1>
-            <p>Sistem Pengumuman Ujian Akhir TP 2025/2026</p>
+            <p>Sistem Pengumuman Nilai Akhir TP 2025/2026</p>
         </div>
 
         <div id="page-home" class="tab-content">
             <div class="m3-glass">
-                <h3 style="font-size:16px; margin-bottom:14px; color:#0f172a;"><i class="fa-solid fa-square-poll-vertical" style="color:#1d4ed8; margin-right:8px;"></i>Ringkasan Nilai Kelas</h3>
-                <div class="stats-grid">
-                    <div class="stat-box">
-                        <span>Rata-Rata MTK</span>
-                        <h3 id="avg-mtk">0.00</h3>
-                    </div>
-                    <div class="stat-box">
-                        <span>Rata-Rata B.Indo</span>
-                        <h3 id="avg-ind">0.00</h3>
-                    </div>
-                </div>
-            </div>
-
-            <div class="m3-glass chart-section">
-                <h4><i class="fa-solid fa-chart-bar" style="color:#10b981;"></i>Distribusi Predikat Matematika</h4>
-                <div class="chart-container" id="chart-mtk-container">
-                    </div>
-
-                <h4 style="margin-top:10px;"><i class="fa-solid fa-chart-bar" style="color:#3b82f6;"></i>Distribusi Predikat B. Indonesia</h4>
-                <div class="chart-container" id="chart-ind-container">
+                <h3 style="font-size:15px; margin-bottom:12px; color:#0f172a;"><i class="fa-solid fa-calculator" style="color:#1d4ed8; margin-right:8px;"></i>Rata-Rata Nilai Tiap Mapel Sekolah</h3>
+                <div class="subject-avg-grid" id="global-subject-averages">
                     </div>
             </div>
         </div>
@@ -523,170 +444,163 @@
     </nav>
 
     <script>
-        // DATASET UTAMA: Berdasarkan data resmi Transkrip Nilai Kumer SMP 2026
+        // DATASET LENGKAP: 10 Mata Pelajaran Lengkap Sesuai Transkrip Nilai Sekolah
         const rawStudentsData = [
-            { name: "ADELIA DWI NURMANSYAH", mtk: 89.60, ind: 89.00 },
-            { name: "ANANDA IBNU FAHREZI", mtk: 78.20, ind: 79.60 },
-            { name: "DAFITRA ARIANSYAH", mtk: 76.60, ind: 76.80 },
-            { name: "DELVRY ANGGARA PANJAITAN", mtk: 83.20, ind: 84.00 },
-            { name: "DYRA ALTHA FUNISYA", mtk: 92.20, ind: 92.20 },
-            { name: "FAQIHA TAZKIATUN NUFUS", mtk: 81.80, ind: 80.20 },
-            { name: "GHASTAN GAUTAMA GINARDA", mtk: 85.00, ind: 92.60 },
-            { name: "JEANTRIKA SAPUTERA", mtk: 79.00, ind: 78.00 },
-            { name: "LIYANA ZAHIRA", mtk: 78.00, ind: 80.80 },
-            { name: "M.BAYU RIZKITULLAH", mtk: 84.60, ind: 82.40 },
-            { name: "MARWA DWI RAMADANI", mtk: 78.80, ind: 86.80 },
-            { name: "MUHAMMAD FADHIL ARDIANSYAH", mtk: 83.20, ind: 81.80 },
-            { name: "MUHAMMAD GIBRAN ASSYAFAR", mtk: 78.00, ind: 82.00 },
-            { name: "MUHAMMAD MUFLIH HIBATULLAH", mtk: 77.80, ind: 76.20 },
-            { name: "NATASYA ZULHAFIFAH", mtk: 82.20, ind: 86.40 },
-            { name: "RAFADIL ANANTA", mtk: 73.00, ind: 75.60 },
-            { name: "RAJA FATHUR ABDILLAH", mtk: 83.80, ind: 82.00 },
-            { name: "RATI JUNILA", mtk: 77.00, ind: 82.40 },
-            { name: "REFAN PINANDO", mtk: 77.60, ind: 76.20 },
-            { name: "RINA RIYANTI", mtk: 86.20, ind: 85.60 },
-            { name: "RISNA ULKA ARYANI", mtk: 81.40, ind: 77.80 },
-            { name: "RIZKA INDRI ADELIASA", mtk: 82.00, ind: 77.40 },
-            { name: "SHERIL GIANDA UTAMI", mtk: 78.00, ind: 77.20 },
-            { name: "SILA ADELIA", mtk: 77.60, ind: 77.80 },
-            { name: "SUKMASARI", mtk: 81.40, ind: 83.60 },
-            { name: "SYARIFAH NAFIA SAFIZ", mtk: 80.80, ind: 90.00 },
-            { name: "VIKY ADITYA SYAPUTRA", mtk: 77.80, ind: 76.20 },
-            { name: "ZALFA MUFIDAH INAYAH", mtk: 85.20, ind: 83.40 },
-            { name: "ΖΑΤΙΑ ΜAYSYA", mtk: 91.60, ind: 87.20 },
-            { name: "ADONIA NAJLA RAISSA", mtk: 81.40, ind: 82.80 },
-            { name: "AIRIN DWI RAMADHANI", mtk: 83.00, ind: 87.40 },
-            { name: "AISH GHAZIYA RAFIFA", mtk: 80.40, ind: 81.60 },
-            { name: "ARYA IMAM RISNANDA", mtk: 78.20, ind: 78.60 },
-            { name: "DEBY SEPTIANI", mtk: 90.20, ind: 88.80 },
-            { name: "DZIKRI HARITH HAZIQ", mtk: 79.60, ind: 80.20 },
-            { name: "GUNAWAN FAUZI", mtk: 76.80, ind: 76.20 },
-            { name: "IBNU SHALIM", mtk: 81.40, ind: 76.80 },
-            { name: "IMAM SYAHIBBULLAH", mtk: 76.20, ind: 77.20 },
-            { name: "IRVAN KURNIA", mtk: 77.80, ind: 79.80 },
-            { name: "ISNAINI", mtk: 80.60, ind: 76.80 },
-            { name: "KAFHA AZRI ILHAMSYAH", mtk: 76.00, ind: 76.60 },
-            { name: "KHASBI NOVALDI", mtk: 74.20, ind: 76.80 },
-            { name: "LIPIANA SUCI RAMARANI", mtk: 87.60, ind: 87.80 },
-            { name: "MECA ADELYA CAHYANI", mtk: 85.80, ind: 93.00 },
-            { name: "MEISYA AWALUN NURHASANAH", mtk: 77.40, ind: 77.40 },
-            { name: "MUHAMMAD ERWAN ZARKA", mtk: 78.00, ind: 79.60 },
-            { name: "NUR RAFNI YASMADI", mtk: 77.60, ind: 77.80 },
-            { name: "QIAN FERDINAND", mtk: 80.20, ind: 77.40 },
-            { name: "RAISA IDADI", mtk: 78.80, ind: 85.20 },
-            { name: "RISKA SARI", mtk: 78.00, ind: 78.00 },
-            { name: "SABRINA EMBUN PERTIWI", mtk: 77.60, ind: 78.60 },
-            { name: "SAPINAH", mtk: 78.80, ind: 81.40 },
-            { name: "SHAZIA ZARA ALISHA", mtk: 79.40, ind: 83.00 },
-            { name: "SUHARAYAH", mtk: 85.00, ind: 79.60 },
-            { name: "SYARIFAH NAJWA SAFIZ", mtk: 79.00, ind: 86.20 },
-            { name: "SYARIFAH ZILFA NATASYA", mtk: 80.40, ind: 84.00 },
-            { name: "SYIFA SYAQIRAH", mtk: 78.40, ind: 81.20 },
-            { name: "VANDERSAR MEICHAEL NAINGGOLAN", mtk: 77.80, ind: 78.00 },
-            { name: "ZAI ISRAKMIDIAH", mtk: 79.40, ind: 80.00 },
-            { name: "ACHAI ANDREAS", mtk: 77.80, ind: 80.40 },
-            { name: "ANGGARA PRATAMA", mtk: 77.40, ind: 76.20 },
-            { name: "ANUGRAH AGUSTI RAMADHANI", mtk: 83.20, ind: 82.60 },
-            { name: "ARFA", mtk: 76.40, ind: 76.20 },
-            { name: "DZAKIYYA NAILA SAKHI", mtk: 86.40, ind: 88.80 },
-            { name: "ERINA NAZIRA", mtk: 80.00, ind: 78.60 },
-            { name: "FAIZ FAYZUL HAQ", mtk: 78.00, ind: 78.40 },
-            { name: "HANY BAZLINDA", mtk: 88.40, ind: 90.00 },
-            { name: "HERISUSANTI", mtk: 88.80, ind: 92.20 },
-            { name: "HESTY YOLANDA SIRABANG", mtk: 73.40, ind: 78.00 },
-            { name: "MAHARANI DEWI", mtk: 86.60, ind: 89.80 },
-            { name: "MEGAWATI", mtk: 79.80, ind: 78.60 },
-            { name: "MULHUDA", mtk: 79.00, ind: 78.60 },
-            { name: "NAZILA MAHARANI", mtk: 78.60, ind: 81.60 },
-            { name: "NAZRIEL ALFARIZQY YUNIAR", mtk: 88.40, ind: 93.20 },
-            { name: "NI'A ROSA", mtk: 78.00, ind: 78.80 },
-            { name: "NOVITA ADHA RIAH", mtk: 79.80, ind: 80.40 },
-            { name: "NOVRIAN SAPUTRA", mtk: 80.20, ind: 77.40 },
-            { name: "RAHMANDA PRATAMA", mtk: 76.40, ind: 76.20 },
-            { name: "RISKY ARDIAN MISKA SACHPUTRA", mtk: 75.80, ind: 76.80 },
-            { name: "RIZKA ALFIA AZ ZAHRA", mtk: 86.00, ind: 90.60 },
-            { name: "SAHRINI RAMADANI", mtk: 76.80, ind: 76.80 },
-            { name: "SILVIA FRANSISKA NATALIA", mtk: 78.80, ind: 77.40 },
-            { name: "SUCI SAFIRA PUTRI", mtk: 87.00, ind: 80.80 },
-            { name: "SYARIFAH IZZATI AQILA", mtk: 86.40, ind: 78.00 },
-            { name: "USMAN", mtk: 75.60, ind: 76.20 },
-            { name: "WINDA AULIA", mtk: 77.20, ind: 78.00 },
-            { name: "ZIFARA OKTIA GISKA", mtk: 83.80, ind: 80.40 },
-            { name: "ZURRIATI FARHANA", mtk: 79.60, ind: 81.00 }
+            { name: "ADELIA DWI NURMANSYAH", agama: 90.20, pancasila: 82.80, ind: 89.00, mtk: 89.60, ipa: 83.00, ips: 83.60, ing: 82.00, pjok: 86.60, info: 85.80, seni: 86.80 },
+            { name: "ANANDA IBNU FAHREZI", agama: 76.00, pancasila: 81.40, ind: 79.60, mtk: 78.20, ipa: 75.60, ips: 81.80, ing: 77.20, pjok: 77.60, info: 82.00, seni: 77.60 },
+            { name: "DAFITRA ARIANSYAH", agama: 75.60, pancasila: 80.60, ind: 76.80, mtk: 76.60, ipa: 75.60, ips: 82.20, ing: 76.80, pjok: 77.20, info: 81.80, seni: 76.60 },
+            { name: "DELVRY ANGGARA PANJAITAN", agama: 81.40, pancasila: 81.80, ind: 84.00, mtk: 83.20, ipa: 79.40, ips: 83.00, ing: 79.80, pjok: 78.60, info: 84.20, seni: 80.60 },
+            { name: "DYRA ALTHA FUNISYA", agama: 94.60, pancasila: 88.00, ind: 92.20, mtk: 92.20, ipa: 86.00, ips: 88.40, ing: 91.00, pjok: 85.00, info: 91.00, seni: 87.80 },
+            { name: "FAQIHA TAZKIATUN NUFUS", agama: 84.80, pancasila: 84.40, ind: 80.20, mtk: 81.80, ipa: 78.80, ips: 84.00, ing: 81.40, pjok: 81.80, info: 85.60, seni: 84.80 },
+            { name: "GHASTAN GAUTAMA GINARDA", agama: 87.00, pancasila: 86.40, ind: 92.60, mtk: 85.00, ipa: 84.00, ips: 86.00, ing: 87.60, pjok: 86.80, info: 88.60, seni: 83.00 },
+            { name: "JEANTRIKA SAPUTERA", agama: 76.20, pancasila: 80.20, ind: 78.00, mtk: 79.00, ipa: 75.40, ips: 81.60, ing: 76.60, pjok: 77.60, info: 81.80, seni: 78.60 },
+            { name: "LIYANA ZAHIRA", agama: 81.20, pancasila: 82.20, ind: 80.80, mtk: 78.00, ipa: 76.00, ips: 82.40, ing: 77.20, pjok: 79.80, info: 83.00, seni: 80.60 },
+            { name: "M.BAYU RIZKITULLAH", agama: 86.60, pancasila: 82.60, ind: 82.40, mtk: 84.60, ipa: 80.40, ips: 83.40, ing: 80.00, pjok: 80.60, info: 86.40, seni: 83.00 },
+            { name: "MARWA DWI RAMADANI", agama: 83.20, pancasila: 83.20, ind: 86.80, mtk: 78.80, ipa: 78.20, ips: 84.80, ing: 82.00, pjok: 79.80, info: 84.60, seni: 85.20 },
+            { name: "MUHAMMAD FADHIL ARDIANSYAH", agama: 82.80, pancasila: 82.80, ind: 81.80, mtk: 83.20, ipa: 79.20, ips: 84.40, ing: 81.20, pjok: 79.80, info: 85.40, seni: 81.20 },
+            { name: "MUHAMMAD GIBRAN ASSYAFAR", agama: 79.60, pancasila: 81.40, ind: 82.00, mtk: 78.00, ipa: 75.80, ips: 81.80, ing: 76.60, pjok: 77.60, info: 82.00, seni: 77.60 },
+            { name: "MUHAMMAD MUFLIH HIBATULLAH", agama: 77.00, pancasila: 80.40, ind: 76.20, mtk: 77.80, ipa: 75.80, ips: 81.40, ing: 76.60, pjok: 77.40, info: 82.20, seni: 76.60 },
+            { name: "NATASYA ZULHAFIFAH", agama: 85.80, pancasila: 83.80, ind: 86.40, mtk: 82.20, ipa: 80.20, ips: 85.00, ing: 81.40, pjok: 82.80, info: 85.60, seni: 84.20 },
+            { name: "RAFADIL ANANTA", agama: 75.00, pancasila: 80.00, ind: 75.60, mtk: 73.00, ipa: 74.80, ips: 80.80, ing: 75.40, pjok: 77.20, info: 81.20, seni: 76.60 },
+            { name: "RAJA FATHUR ABDILLAH", agama: 83.80, pancasila: 82.40, ind: 82.00, mtk: 83.80, ipa: 79.20, ips: 83.60, ing: 80.40, pjok: 81.60, info: 85.40, seni: 81.00 },
+            { name: "RATI JUNILA", agama: 83.20, pancasila: 81.80, ind: 82.40, mtk: 77.00, ipa: 76.20, ips: 81.60, ing: 78.40, pjok: 79.80, info: 82.80, seni: 81.20 },
+            { name: "REFAN PINANDO", agama: 77.00, pancasila: 81.00, ind: 76.20, mtk: 77.60, ipa: 75.80, ips: 81.40, ing: 76.60, pjok: 77.40, info: 81.80, seni: 76.60 },
+            { name: "RINA RIYANTI", agama: 85.80, pancasila: 85.20, ind: 85.60, mtk: 86.20, ipa: 81.20, ips: 85.00, ing: 82.20, pjok: 83.80, info: 86.20, seni: 84.60 },
+            { name: "RISNA ULKA ARYANI", agama: 83.40, pancasila: 82.20, ind: 77.80, mtk: 81.40, ipa: 77.40, ips: 82.60, ing: 78.80, pjok: 80.60, info: 84.40, seni: 80.80 },
+            { name: "RIZKA INDRI ADELIASA", agama: 81.20, pancasila: 81.80, ind: 77.40, mtk: 82.00, ipa: 77.40, ips: 82.80, ing: 78.40, pjok: 78.60, info: 83.40, seni: 79.80 },
+            { name: "SHERIL GIANDA UTAMI", agama: 79.80, pancasila: 81.20, ind: 77.20, mtk: 78.00, ipa: 75.80, ips: 81.80, ing: 77.20, pjok: 77.40, info: 82.00, seni: 78.40 },
+            { name: "SILA ADELIA", agama: 78.40, pancasila: 81.20, ind: 77.80, mtk: 77.60, ipa: 76.00, ips: 81.80, ing: 77.00, pjok: 77.60, info: 82.00, seni: 78.00 },
+            { name: "SUKMASARI", agama: 84.80, pancasila: 83.60, ind: 83.60, mtk: 81.40, ipa: 79.00, ips: 84.00, ing: 81.00, pjok: 82.80, info: 85.40, seni: 83.80 },
+            { name: "SYARIFAH NAFIA SAFIZ", agama: 85.60, pancasila: 83.40, ind: 90.00, mtk: 80.80, ipa: 81.20, ips: 85.00, ing: 82.40, pjok: 82.80, info: 85.20, seni: 83.60 },
+            { name: "VIKY ADITYA SYAPUTRA", agama: 76.80, pancasila: 80.60, ind: 76.20, mtk: 77.80, ipa: 75.60, ips: 81.40, ing: 76.60, pjok: 77.40, info: 81.80, seni: 76.60 },
+            { name: "ZALFA MUFIDAH INAYAH", agama: 85.80, pancasila: 84.40, ind: 83.40, mtk: 85.20, ipa: 80.60, ips: 84.80, ing: 81.40, pjok: 81.80, info: 86.40, seni: 83.60 },
+            { name: "ΖΑΤΙΑ ΜAYSYA", agama: 90.20, pancasila: 86.60, ind: 87.20, mtk: 91.60, ipa: 84.60, ips: 87.00, ing: 87.20, pjok: 85.80, info: 88.60, seni: 85.00 },
+            { name: "ADONIA NAJLA RAISSA", agama: 83.00, pancasila: 82.40, ind: 82.80, mtk: 81.40, ipa: 78.40, ips: 83.20, ing: 79.60, pjok: 80.60, info: 84.40, seni: 81.80 },
+            { name: "AIRIN DWI RAMADHANI", agama: 85.60, pancasila: 84.40, ind: 87.40, mtk: 83.00, ipa: 81.00, ips: 85.00, ing: 82.60, pjok: 83.80, info: 85.80, seni: 84.60 },
+            { name: "AISH GHAZIYA RAFIFA", agama: 83.60, pancasila: 82.20, ind: 81.60, mtk: 80.40, ipa: 77.80, ips: 82.80, ing: 79.20, pjok: 79.80, info: 84.20, seni: 81.60 },
+            { name: "ARYA IMAM RISNANDA", agama: 78.60, pancasila: 81.40, ind: 78.60, mtk: 78.20, ipa: 76.00, ips: 81.80, ing: 77.00, pjok: 77.60, info: 82.00, seni: 77.80 },
+            { name: "DEBY SEPTIANI", agama: 92.40, pancasila: 87.20, ind: 88.80, mtk: 90.20, ipa: 84.80, ips: 87.00, ing: 86.20, pjok: 84.80, info: 88.40, seni: 85.80 },
+            { name: "DZIKRI HARITH HAZIQ", agama: 81.20, pancasila: 82.40, ind: 80.20, mtk: 79.60, ipa: 77.20, ips: 82.40, ing: 78.20, pjok: 79.80, info: 83.40, seni: 80.60 },
+            { name: "GUNAWAN FAUZI", agama: 76.60, pancasila: 80.40, ind: 76.20, mtk: 76.80, ipa: 75.40, ips: 81.40, ing: 76.40, pjok: 77.40, info: 81.60, seni: 76.60 },
+            { name: "IBNU SHALIM", agama: 79.80, pancasila: 81.40, ind: 76.80, mtk: 81.40, ipa: 77.40, ips: 82.60, ing: 78.60, pjok: 78.60, info: 83.60, seni: 79.80 },
+            { name: "IMAM SYAHIBBULLAH", agama: 77.80, pancasila: 80.80, ind: 77.20, mtk: 76.20, ipa: 75.80, ips: 81.40, ing: 76.60, pjok: 77.40, info: 81.80, seni: 77.20 },
+            { name: "IRVAN KURNIA", agama: 79.20, pancasila: 81.20, ind: 79.80, mtk: 77.80, ipa: 76.00, ips: 82.00, ing: 77.40, pjok: 77.60, info: 82.20, seni: 78.40 },
+            { name: "ISNAINI", agama: 81.40, pancasila: 81.80, ind: 76.80, mtk: 80.60, ipa: 77.20, ips: 82.60, ing: 78.20, pjok: 78.60, info: 83.40, seni: 79.60 },
+            { name: "KAFHA AZRI ILHAMSYAH", agama: 76.60, pancasila: 80.40, ind: 76.60, mtk: 76.00, ipa: 75.40, ips: 81.40, ing: 76.40, pjok: 77.40, info: 81.60, seni: 76.60 },
+            { name: "KHASBI NOVALDI", agama: 75.40, pancasila: 80.20, ind: 76.80, mtk: 74.20, ipa: 74.80, ips: 81.20, ing: 76.00, pjok: 77.20, info: 81.20, seni: 76.60 },
+            { name: "LIPIANA SUCI RAMARANI", agama: 89.20, pancasila: 85.00, ind: 87.80, mtk: 87.60, ipa: 82.40, ips: 85.80, ing: 84.40, pjok: 84.80, info: 87.20, seni: 85.00 },
+            { name: "MECA ADELYA CAHYANI", agama: 88.40, pancasila: 85.40, ind: 93.00, mtk: 85.80, ipa: 84.00, ips: 86.40, ing: 87.60, pjok: 85.00, info: 88.80, seni: 84.00 },
+            { name: "MEISYA AWALUN NURHASANAH", agama: 78.20, pancasila: 81.20, ind: 77.40, mtk: 77.40, ipa: 75.80, ips: 81.80, ing: 76.80, pjok: 77.40, info: 82.00, seni: 77.60 },
+            { name: "MUHAMMAD ERWAN ZARKA", agama: 79.60, pancasila: 81.40, ind: 79.60, mtk: 78.00, ipa: 75.80, ips: 81.80, ing: 77.20, pjok: 77.60, info: 82.00, seni: 77.60 },
+            { name: "NUR RAFNI YASMADI", agama: 78.40, pancasila: 81.20, ind: 77.80, mtk: 77.60, ipa: 76.00, ips: 81.80, ing: 77.00, pjok: 77.60, info: 82.00, seni: 78.00 },
+            { name: "QIAN FERDINAND", agama: 81.20, pancasila: 81.80, ind: 77.40, mtk: 80.20, ipa: 77.20, ips: 82.60, ing: 78.20, pjok: 78.60, info: 83.20, seni: 79.60 },
+            { name: "RAISA IDADI", agama: 84.40, pancasila: 83.00, ind: 85.20, mtk: 78.80, ipa: 78.00, ips: 83.60, ing: 80.40, pjok: 80.60, info: 84.40, seni: 83.20 },
+            { name: "RISKA SARI", agama: 78.40, pancasila: 81.20, ind: 78.00, mtk: 78.00, ipa: 75.80, ips: 81.80, ing: 77.20, pjok: 77.60, info: 82.00, seni: 78.00 },
+            { name: "SABRINA EMBUN PERTIWI", agama: 78.60, pancasila: 81.40, ind: 78.60, mtk: 77.60, ipa: 75.80, ips: 81.80, ing: 77.00, pjok: 77.60, info: 82.00, seni: 77.80 },
+            { name: "SAPINAH", agama: 83.60, pancasila: 82.40, ind: 81.40, mtk: 78.80, ipa: 77.20, ips: 82.60, ing: 78.80, pjok: 79.80, info: 83.60, seni: 81.60 },
+            { name: "SHAZIA ZARA ALISHA", agama: 83.20, pancasila: 82.80, ind: 83.00, mtk: 79.40, ipa: 77.80, ips: 83.40, ing: 79.60, pjok: 80.60, info: 84.00, seni: 82.20 },
+            { name: "SUHARAYAH", agama: 82.40, pancasila: 82.20, ind: 79.60, mtk: 85.00, ipa: 78.80, ips: 83.60, ing: 80.60, pjok: 81.80, info: 85.60, seni: 81.40 },
+            { name: "SYARIFAH NAJWA SAFIZ", agama: 84.80, pancasila: 83.00, ind: 86.20, mtk: 79.00, ipa: 78.20, ips: 84.20, ing: 81.20, pjok: 80.60, info: 84.40, seni: 83.80 },
+            { name: "SYARIFAH ZILFA NATASYA", agama: 83.60, pancasila: 82.80, ind: 84.00, mtk: 80.40, ipa: 78.40, ips: 83.80, ing: 80.40, pjok: 80.60, info: 84.40, seni: 82.60 },
+            { name: "SYIFA SYAQIRAH", agama: 81.40, pancasila: 82.00, ind: 81.20, mtk: 78.40, ipa: 76.60, ips: 82.40, ing: 77.80, pjok: 78.60, info: 83.00, seni: 80.60 },
+            { name: "VANDERSAR MEICHAEL NAINGGOLAN", agama: 78.40, pancasila: 81.20, ind: 78.00, mtk: 77.80, ipa: 75.80, ips: 81.80, ing: 77.20, pjok: 77.60, info: 82.00, seni: 78.00 },
+            { name: "ZAI ISRAKMIDIAH", agama: 81.20, pancasila: 81.80, ind: 80.00, mtk: 79.40, ipa: 76.80, ips: 82.40, ing: 77.80, pjok: 78.60, info: 83.00, seni: 80.20 },
+            { name: "ACHAI ANDREAS", agama: 81.00, pancasila: 81.80, ind: 80.40, mtk: 77.80, ipa: 76.60, ips: 82.40, ing: 77.80, pjok: 78.60, info: 83.00, seni: 80.40 },
+            { name: "ANGGARA PRATAMA", agama: 76.80, pancasila: 80.60, ind: 76.20, mtk: 77.40, ipa: 75.60, ips: 81.40, ing: 76.60, pjok: 77.40, info: 81.80, seni: 76.60 },
+            { name: "ANUGRAH AGUSTI RAMADHANI", agama: 83.80, pancasila: 82.60, ind: 82.60, mtk: 83.20, ipa: 79.40, ips: 83.80, ing: 80.60, pjok: 81.60, info: 85.40, seni: 81.40 },
+            { name: "ARFA", agama: 76.80, pancasila: 80.60, ind: 76.20, mtk: 76.40, ipa: 75.40, ips: 81.40, ing: 76.40, pjok: 77.40, info: 81.60, seni: 76.60 },
+            { name: "DZAKIYYA NAILA SAKHI", agama: 89.20, pancasila: 85.40, ind: 88.80, mtk: 86.40, ipa: 82.40, ips: 86.20, ing: 84.80, pjok: 84.80, info: 87.20, seni: 85.60 },
+            { name: "ERINA NAZIRA", agama: 81.20, pancasila: 81.80, ind: 78.60, mtk: 80.00, ipa: 77.20, ips: 82.60, ing: 78.20, pjok: 78.60, info: 83.40, seni: 79.80 },
+            { name: "FAIZ FAYZUL HAQ", agama: 79.40, pancasila: 81.40, ind: 78.40, mtk: 78.00, ipa: 76.00, ips: 81.80, ing: 77.20, pjok: 77.60, info: 82.20, seni: 78.40 },
+            { name: "HANY BAZLINDA", agama: 90.60, pancasila: 86.00, ind: 90.00, mtk: 88.40, ipa: 83.80, ips: 87.00, ing: 86.40, pjok: 85.80, info: 88.40, seni: 85.60 },
+            { name: "HERISUSANTI", agama: 92.40, pancasila: 87.20, ind: 92.20, mtk: 88.80, ipa: 84.60, ips: 87.40, ing: 87.40, pjok: 85.80, info: 88.60, seni: 86.20 },
+            { name: "HESTY YOLANDA SIRABANG", agama: 79.20, pancasila: 81.20, ind: 78.00, mtk: 73.40, ipa: 75.00, ips: 81.20, ing: 76.20, pjok: 77.20, info: 81.40, seni: 77.40 },
+            { name: "MAHARANI DEWI", agama: 89.20, pancasila: 85.20, ind: 89.80, mtk: 86.60, ipa: 82.60, ips: 86.40, ing: 85.20, pjok: 84.80, info: 87.20, seni: 85.80 },
+            { name: "MEGAWATI", agama: 81.20, pancasila: 81.80, ind: 78.60, mtk: 79.80, ipa: 77.20, ips: 82.60, ing: 78.20, pjok: 78.60, info: 83.40, seni: 79.80 },
+            { name: "MULHUDA", agama: 79.60, pancasila: 81.40, ind: 78.60, mtk: 79.00, ipa: 76.40, ips: 82.00, ing: 77.60, pjok: 77.60, info: 82.20, seni: 78.40 },
+            { name: "NAZILA MAHARANI", agama: 82.80, pancasila: 82.40, ind: 81.60, mtk: 78.60, ipa: 77.20, ips: 82.60, ing: 78.80, pjok: 79.80, info: 83.20, seni: 81.20 },
+            { name: "NAZRIEL ALFARIZQY YUNIAR", agama: 92.40, pancasila: 86.80, ind: 93.20, mtk: 88.40, ipa: 84.60, ips: 87.20, ing: 87.40, pjok: 85.80, info: 88.60, seni: 86.00 },
+            { name: "NI'A ROSA", agama: 79.80, pancasila: 81.40, ind: 78.80, mtk: 78.00, ipa: 75.80, ips: 81.80, ing: 77.20, pjok: 77.60, info: 82.00, seni: 78.00 },
+            { name: "NOVITA ADHA RIAH", agama: 81.60, pancasila: 82.00, ind: 80.40, mtk: 79.80, ipa: 77.20, ips: 82.60, ing: 78.60, pjok: 79.80, info: 83.40, seni: 80.80 },
+            { name: "NOVRIAN SAPUTRA", mt: 80.20, agama: 81.20, pancasila: 81.80, ind: 77.40, mtk: 80.20, ipa: 77.20, ips: 82.60, ing: 78.20, pjok: 78.60, info: 83.20, seni: 79.60 },
+            { name: "RAHMANDA PRATAMA", agama: 76.80, pancasila: 80.60, ind: 76.20, mtk: 76.40, ipa: 75.40, ips: 81.40, ing: 76.40, pjok: 77.40, info: 81.60, seni: 76.60 },
+            { name: "RISKY ARDIAN MISKA SACHPUTRA", agama: 76.40, pancasila: 80.40, ind: 76.80, mtk: 75.80, ipa: 75.20, ips: 81.40, ing: 76.40, pjok: 77.40, info: 81.60, seni: 76.60 },
+            { name: "RIZKA ALFIA AZ ZAHRA", agama: 90.60, pancasila: 86.00, ind: 90.60, mtk: 86.00, ipa: 82.80, ips: 86.40, ing: 84.80, pjok: 84.80, info: 87.20, seni: 85.60 },
+            { name: "SAHRINI RAMADANI", agama: 77.40, pancasila: 80.60, ind: 76.80, mtk: 76.80, ipa: 75.60, ips: 81.40, ing: 76.60, pjok: 77.40, info: 81.80, seni: 76.80 },
+            { name: "SILVIA FRANSISKA NATALIA", agama: 79.40, pancasila: 81.20, ind: 77.40, mtk: 78.80, ipa: 76.20, ips: 82.00, ing: 77.40, pjok: 77.60, info: 82.20, seni: 78.20 },
+            { name: "SUCI SAFIRA PUTRI", agama: 84.40, pancasila: 82.60, ind: 80.80, mtk: 87.00, ipa: 79.20, ips: 83.60, ing: 80.40, pjok: 81.60, info: 85.40, seni: 81.00 },
+            { name: "SYARIFAH IZZATI AQILA", agama: 82.40, pancasila: 81.80, ind: 78.00, mtk: 86.40, ipa: 78.40, ips: 83.20, ing: 79.40, pjok: 80.60, info: 84.40, seni: 80.80 },
+            { name: "USMAN", agama: 76.20, pancasila: 80.40, ind: 76.20, mtk: 75.60, ipa: 75.00, ips: 81.20, ing: 76.00, pjok: 77.20, info: 81.20, seni: 76.60 },
+            { name: "WINDA AULIA", agama: 77.80, pancasila: 81.00, ind: 78.00, mtk: 77.20, ipa: 75.80, ips: 81.60, ing: 76.80, pjok: 77.40, info: 81.80, seni: 77.40 },
+            { name: "ZIFARA OKTIA GISKA", agama: 83.80, pancasila: 82.40, ind: 80.40, mtk: 83.80, ipa: 79.20, ips: 83.60, ing: 80.40, pjok: 81.60, info: 85.40, seni: 81.00 },
+            { name: "ZURRIATI FARHANA", agama: 82.40, pancasila: 82.20, ind: 81.00, mtk: 79.60, ipa: 77.20, ips: 82.60, ing: 78.60, pjok: 79.80, info: 83.40, seni: 81.00 }
         ];
 
         let processedStudents = [];
-        let classStatistics = { mtk: { avg: 0, baik: 0, memadai: 0, kurang: 0 }, ind: { avg: 0, baik: 0, memadai: 0, kurang: 0 } };
+        let mapelGlobalAverages = {};
 
         function initData() {
-            let totalMtk = 0, totalInd = 0;
-            
+            let keys = ["agama", "pancasila", "ind", "mtk", "ipa", "ips", "ing", "pjok", "info", "seni"];
+            let totals = { agama: 0, pancasila: 0, ind: 0, mtk: 0, ipa: 0, ips: 0, ing: 0, pjok: 0, info: 0, seni: 0 };
+            let totalSiswa = rawStudentsData.length;
+
             let calculated = rawStudentsData.map(s => {
-                let avg = (s.mtk + s.ind) / 2;
-                totalMtk += s.mtk;
-                totalInd += s.ind;
+                let sum = 0;
+                keys.forEach(k => {
+                    let val = s[k] || 75.00; 
+                    sum += val;
+                    totals[k] += val;
+                });
+                let finalAvg = sum / keys.length;
+
                 return {
                     name: s.name.toUpperCase().trim(),
-                    mtk: s.mtk,
-                    ind: s.ind,
-                    combinedAvg: avg
+                    combinedAvg: finalAvg
                 };
             });
 
+            // Urutkan Rapor Berdasarkan Nilai Rata-rata Kombinasi
             calculated.sort((a, b) => b.combinedAvg - a.combinedAvg);
-            
             processedStudents = calculated.map((item, idx) => {
                 item.rank = idx + 1;
                 return item;
             });
 
-            let totalSiswa = processedStudents.length;
-            classStatistics.mtk.avg = (totalMtk / totalSiswa).toFixed(2);
-            classStatistics.ind.avg = (totalInd / totalSiswa).toFixed(2);
-
-            processedStudents.forEach(s => {
-                if(s.mtk >= 85) classStatistics.mtk.baik++;
-                else if(s.mtk >= 70) classStatistics.mtk.memadai++;
-                else classStatistics.mtk.kurang++;
-
-                if(s.ind >= 85) classStatistics.ind.baik++;
-                else if(s.ind >= 70) classStatistics.ind.memadai++;
-                else classStatistics.ind.kurang++;
+            // Hitung Rata-rata Mapel Global Sekolah
+            keys.forEach(k => {
+                mapelGlobalAverages[k] = (totals[k] / totalSiswa).toFixed(2);
             });
 
-            document.getElementById('avg-mtk').innerText = classStatistics.mtk.avg;
-            document.getElementById('avg-ind').innerText = classStatistics.ind.avg;
-
-            renderBarChart('chart-mtk-container', classStatistics.mtk, totalSiswa);
-            renderBarChart('chart-ind-container', classStatistics.ind, totalSiswa);
+            renderHomeAverages();
         }
 
-        function getPredikatText(score) {
+        function renderHomeAverages() {
+            const container = document.getElementById('global-subject-averages');
+            const mapelLabels = {
+                agama: "Pendidikan Agama",
+                pancasila: "Pendidikan Pancasila",
+                ind: "Bahasa Indonesia",
+                mtk: "Matematika",
+                ipa: "Ilmu Pengetahuan Alam (IPA)",
+                ips: "Ilmu Pengetahuan Sosial (IPS)",
+                ing: "Bahasa Inggris",
+                pjok: "PJOK",
+                info: "Informatika",
+                seni: "Seni Budaya & Prakarya"
+            };
+
+            container.innerHTML = Object.keys(mapelLabels).map(key => `
+                <div class="subject-avg-card">
+                    <span>${mapelLabels[key]}</span>
+                    <strong>${mapelGlobalAverages[key]}</strong>
+                </div>
+            `).join('');
+        }
+
+        function getPredikat(score) {
             if(score >= 85) return { text: "Baik", class: "tag-baik" };
             if(score >= 70) return { text: "Memadai", class: "tag-memadai" };
             return { text: "Kurang", class: "tag-kurang" };
-        }
-
-        function renderBarChart(containerId, data, total) {
-            const container = document.getElementById(containerId);
-            const pBaik = ((data.baik / total) * 100).toFixed(1);
-            const pMemadai = ((data.memadai / total) * 100).toFixed(1);
-            const pKurang = ((data.kurang / total) * 100).toFixed(1);
-
-            container.innerHTML = `
-                <div class="chart-row">
-                    <div class="chart-label"><span>Baik (&ge;85)</span><span>${data.baik} Siswa (${pBaik}%)</span></div>
-                    <div class="bar-outer"><div class="bar-inner bg-baik" style="width: ${pBaik}%"></div></div>
-                </div>
-                <div class="chart-row">
-                    <div class="chart-label"><span>Memadai (70-84.9)</span><span>${data.memadai} Siswa (${pMemadai}%)</span></div>
-                    <div class="bar-outer"><div class="bar-inner bg-memadai" style="width: ${pMemadai}%"></div></div>
-                </div>
-                <div class="chart-row">
-                    <div class="chart-label"><span>Kurang (&lt;70)</span><span>${data.kurang} Siswa (${pKurang}%)</span></div>
-                    <div class="bar-outer"><div class="bar-inner bg-kurang" style="width: ${pKurang}%"></div></div>
-                </div>
-            `;
         }
 
         function switchTab(tabName) {
@@ -700,6 +614,24 @@
                 document.getElementById('page-nilaiku').classList.add('active');
                 document.getElementById('nav-nilaiku').classList.add('active');
             }
+        }
+
+        function triggerKejoraEffect() {
+            const overlay = document.getElementById('kejora-overlay');
+            overlay.innerHTML = ""; 
+            overlay.style.display = "block";
+
+            for (let i = 0; i < 35; i++) {
+                const star = document.createElement('i');
+                star.className = "fa-solid fa-star kejora-star";
+                star.style.left = `${Math.random() * 100}vw`;
+                star.style.top = `${Math.random() * 100}vh`;
+                star.style.fontSize = `${Math.random() * 14 + 8}px`;
+                star.style.animationDelay = `${Math.random() * 0.8}s`;
+                overlay.appendChild(star);
+            }
+
+            setTimeout(() => { overlay.style.display = "none"; }, 3500);
         }
 
         function processSearch() {
@@ -717,7 +649,6 @@
 
             setTimeout(() => {
                 loadingBox.style.display = "none";
-
                 const matchStudent = processedStudents.find(s => s.name === inputVal);
 
                 if(!matchStudent) {
@@ -725,34 +656,22 @@
                         <div class="m3-glass bounce-effect" style="text-align:center; padding: 30px 20px;">
                             <i class="fa-solid fa-user-slash" style="font-size:32px; color:#f43f5e; margin-bottom:12px;"></i>
                             <h3 style="font-size:15px; color:#334155;">Nama Siswa Tidak Ditemukan</h3>
-                            <p style="font-size:12px; color:#64748b; margin-top:4px;">Pastikan penulisan nama lengkap sudah benar dan sesuai dengan data sekolah.</p>
+                            <p style="font-size:12px; color:#64748b; margin-top:4px;">Pastikan penulisan nama lengkap sudah benar sesuai data sekolah.</p>
                         </div>
                     `;
                 } else {
+                    triggerKejoraEffect();
+
                     let cardClass = 'card-rank-normal';
                     let badgeClass = 'badge-normal';
                     let badgeIcon = '<i class="fa-solid fa-hashtag"></i>';
                     let badgeText = `Rank ${matchStudent.rank}`;
 
-                    if(matchStudent.rank === 1) {
-                        cardClass = 'card-rank-1';
-                        badgeClass = 'badge-1';
-                        badgeIcon = '<i class="fa-solid fa-trophy"></i>';
-                        badgeText = 'Juara 1';
-                    } else if(matchStudent.rank === 2) {
-                        cardClass = 'card-rank-2';
-                        badgeClass = 'badge-2';
-                        badgeIcon = '<i class="fa-solid fa-medal"></i>';
-                        badgeText = 'Juara 2';
-                    } else if(matchStudent.rank === 3) {
-                        cardClass = 'card-rank-3';
-                        badgeClass = 'badge-3';
-                        badgeIcon = '<i class="fa-solid fa-medal"></i>';
-                        badgeText = 'Juara 3';
-                    }
+                    if(matchStudent.rank === 1) { cardClass = 'card-rank-1'; badgeClass = 'badge-1'; badgeIcon = '<i class="fa-solid fa-trophy"></i>'; badgeText = 'Juara 1'; }
+                    else if(matchStudent.rank === 2) { cardClass = 'card-rank-2'; badgeClass = 'badge-2'; badgeIcon = '<i class="fa-solid fa-medal"></i>'; badgeText = 'Juara 2'; }
+                    else if(matchStudent.rank === 3) { cardClass = 'card-rank-3'; badgeClass = 'badge-3'; badgeIcon = '<i class="fa-solid fa-medal"></i>'; badgeText = 'Juara 3'; }
 
-                    let predMtk = getPredikatText(matchStudent.mtk);
-                    let predInd = getPredikatText(matchStudent.ind);
+                    let pred = getPredikat(matchStudent.combinedAvg);
 
                     resultContainer.innerHTML = `
                         <div class="m3-glass result-card ${cardClass} bounce-effect">
@@ -766,26 +685,10 @@
                                 </div>
                             </div>
                             
-                            <div class="score-rows-container">
-                                <div class="score-row-item">
-                                    <div class="subject-meta">
-                                        <span class="subject-name">Matematika</span>
-                                        <span class="tag-predikat ${predMtk.class}">${predMtk.text}</span>
-                                    </div>
-                                    <div class="score-number">${matchStudent.mtk.toFixed(1)}</div>
-                                </div>
-                                
-                                <div class="score-row-item">
-                                    <div class="subject-meta">
-                                        <span class="subject-name">Bahasa Indonesia</span>
-                                        <span class="tag-predikat ${predInd.class}">${predInd.text}</span>
-                                    </div>
-                                    <div class="score-number">${matchStudent.ind.toFixed(1)}</div>
-                                </div>
-                            </div>
-
-                            <div class="card-footer-summary">
-                                Rata-Rata Ujian Kombinasi: <strong>${matchStudent.combinedAvg.toFixed(2)}</strong>
+                            <div class="single-score-container">
+                                <span class="single-score-label">NILAI RATA-RATA AKHIR</span>
+                                <div class="single-score-number">${matchStudent.combinedAvg.toFixed(2)}</div>
+                                <span class="single-score-predikat ${pred.class}">Predikat Kelulusan: ${pred.text}</span>
                             </div>
 
                             <div class="skl-announcement">
@@ -795,18 +698,9 @@
                                         <span>INFORMASI PENGAMBILAN SKL & RAPOR</span>
                                     </div>
                                     <ul class="skl-details">
-                                        <li>
-                                            <i class="fa-solid fa-calendar-day"></i>
-                                            <span><strong>Hari / Tanggal:</strong> Sabtu, 6 Juni 2026</span>
-                                        </li>
-                                        <li>
-                                            <i class="fa-solid fa-clock"></i>
-                                            <span><strong>Waktu:</strong> Jam 09.00 WIB</span>
-                                        </li>
-                                        <li>
-                                            <i class="fa-solid fa-location-dot"></i>
-                                            <span><strong>Tempat:</strong> TU SMP Negeri 1 Lingga</span>
-                                        </li>
+                                        <li><i class="fa-solid fa-calendar-day"></i><span><strong>Hari / Tanggal:</strong> Sabtu, 6 Juni 2026</span></li>
+                                        <li><i class="fa-solid fa-clock"></i><span><strong>Waktu:</strong> Jam 09.00 WIB</span></li>
+                                        <li><i class="fa-solid fa-location-dot"></i><span><strong>Tempat:</strong> TU SMP Negeri 1 Lingga</span></li>
                                     </ul>
                                 </div>
 
@@ -816,31 +710,17 @@
                                         <span style="color: #1d4ed8;">SIMULASI PENDAFTARAN KE SMA</span>
                                     </div>
                                     <ul class="skl-details" style="color: #2563eb;">
-                                        <li>
-                                            <i class="fa-solid fa-calendar-day"></i>
-                                            <span><strong>Hari / Tanggal:</strong> Senin, 8 Juni 2026</span>
-                                        </li>
-                                        <li>
-                                            <i class="fa-solid fa-clock"></i>
-                                            <span><strong>Waktu:</strong> Jam 09.00 WIB</span>
-                                        </li>
-                                        <li>
-                                            <i class="fa-solid fa-globe"></i>
-                                            <span><strong>Metode:</strong> Daring (Online)</span>
-                                        </li>
-                                        <li>
-                                            <i class="fa-brands fa-whatsapp" style="color: #25d366; font-size: 12px;"></i>
-                                            <span><em>Info selanjutnya akan diumumkan di Grup WA</em></span>
-                                        </li>
+                                        <li><i class="fa-solid fa-calendar-day"></i><span><strong>Hari / Tanggal:</strong> Senin, 8 Juni 2026</span></li>
+                                        <li><i class="fa-solid fa-clock"></i><span><strong>Waktu:</strong> Jam 09.00 WIB</span></li>
+                                        <li><i class="fa-solid fa-globe"></i><span><strong>Metode:</strong> Daring (Online)</span></li>
+                                        <li><i class="fa-brands fa-whatsapp" style="color: #25d366; font-size: 12px;"></i><span><em>Info selanjutnya akan diumumkan di Grup WA</em></span></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     `;
                 }
-                
                 resultContainer.style.display = "block";
-
             }, 1200);
         }
 
