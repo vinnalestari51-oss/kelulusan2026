@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amplop Nilai Kelulusan - SMP Negeri 1 Lingga</title>
+    <title>Amplop Nilai Digital - SMP Negeri 1 Lingga</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         /* --- RESET & GLOBAL STYLES --- */
@@ -252,41 +252,49 @@
         .badge-3 { background: #ea580c; color: white; }
         .badge-normal { background: #64748b; color: white; }
 
-        /* TAMPILAN UTAMA RATA-RATA SISWA */
-        .single-score-container {
-            background: rgba(255, 255, 255, 0.6);
+        /* TAMPILAN BANNER KELULUSAN RESMI & RATA-RATA */
+        .congrats-banner {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+            padding: 20px 16px;
             border-radius: 18px;
-            padding: 20px;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.8);
+            box-shadow: inset 0 0 12px rgba(255,255,255,0.2);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
-        .single-score-label {
-            font-size: 13px;
-            font-weight: 600;
-            color: #475569;
-            letter-spacing: 0.5px;
-        }
-        .single-score-number {
-            font-size: 48px;
-            font-weight: 900;
-            color: #1e3a8a;
-            line-height: 1;
-        }
-        .single-score-predikat {
-            font-size: 12px;
+        .congrats-text {
+            font-size: 15px;
             font-weight: 700;
-            padding: 4px 14px;
-            border-radius: 8px;
-            text-transform: uppercase;
-            margin-top: 4px;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        .tag-baik { background: #d1fae5; color: #065f46; }
-        .tag-memadai { background: #dbeafe; color: #1e40af; }
-        .tag-kurang { background: #ffe4e6; color: #991b1b; }
+        .congrats-text i {
+            color: #f59e0b;
+        }
+        .score-display-large {
+            font-size: 44px;
+            font-weight: 900;
+            letter-spacing: -1px;
+            line-height: 1;
+            background: linear-gradient(to bottom, #ffffff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            drop-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .predikat-subtext {
+            font-size: 11px;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 6px;
+            letter-spacing: 0.3px;
+        }
 
         /* --- KOTAK INFO PENGAMBILAN SKL & SIMULASI --- */
         .skl-announcement {
@@ -401,7 +409,7 @@
     <div class="container-mobile">
         <div class="app-header">
             <h1>SMP NEGERI 1 LINGGA</h1>
-            <p>Pengumuman Kelulusan Siswa Kelas IX TP. 2025/2026</p>
+            <p>Sistem Pengumuman Nilai Akhir TP 2025/2026</p>
         </div>
 
         <div id="page-home" class="tab-content">
@@ -417,14 +425,14 @@
                 <label for="student-search-input">Masukkan Nama Lengkap Siswa</label>
                 <div class="input-wrapper">
                     <i class="fa-solid fa-user"></i>
-                    <input type="text" id="student-search-input" placeholder="Contoh: RAYYA ATHIYAH HANIFAA..." autocomplete="off">
+                    <input type="text" id="student-search-input" placeholder="Contoh: ADELIA DWI NURMANSYAH..." autocomplete="off">
                 </div>
                 <button class="btn-search" onclick="processSearch()"><i class="fa-solid fa-envelope-open-text"></i>Buka Amplop Nilai</button>
             </div>
 
             <div class="loading-container" id="loading-box">
                 <div class="spinner"></div>
-                <span class="pulse-text">Membuka Amplop Nilai...</span>
+                <span class="pulse-text">Membuka Amplop Dokumen...</span>
             </div>
 
             <div id="result-container">
@@ -522,7 +530,7 @@
             { name: "NAZRIEL ALFARIZQY YUNIAR", agama: 92.40, pancasila: 86.80, ind: 93.20, mtk: 88.40, ipa: 84.60, ips: 87.20, ing: 87.40, pjok: 85.80, info: 88.60, seni: 86.00 },
             { name: "NI'A ROSA", agama: 79.80, pancasila: 81.40, ind: 78.80, mtk: 78.00, ipa: 75.80, ips: 81.80, ing: 77.20, pjok: 77.60, info: 82.00, seni: 78.00 },
             { name: "NOVITA ADHA RIAH", agama: 81.60, pancasila: 82.00, ind: 80.40, mtk: 79.80, ipa: 77.20, ips: 82.60, ing: 78.60, pjok: 79.80, info: 83.40, seni: 80.80 },
-            { name: "NOVRIAN SAPUTRA", mt: 80.20, agama: 81.20, pancasila: 81.80, ind: 77.40, mtk: 80.20, ipa: 77.20, ips: 82.60, ing: 78.20, pjok: 78.60, info: 83.20, seni: 79.60 },
+            { name: "NOVRIAN SAPUTRA", agama: 81.20, pancasila: 81.80, ind: 77.40, mtk: 80.20, ipa: 77.20, ips: 82.60, ing: 78.20, pjok: 78.60, info: 83.20, seni: 79.60 },
             { name: "RAHMANDA PRATAMA", agama: 76.80, pancasila: 80.60, ind: 76.20, mtk: 76.40, ipa: 75.40, ips: 81.40, ing: 76.40, pjok: 77.40, info: 81.60, seni: 76.60 },
             { name: "RISKY ARDIAN MISKA SACHPUTRA", agama: 76.40, pancasila: 80.40, ind: 76.80, mtk: 75.80, ipa: 75.20, ips: 81.40, ing: 76.40, pjok: 77.40, info: 81.60, seni: 76.60 },
             { name: "RIZKA ALFIA AZ ZAHRA", agama: 90.60, pancasila: 86.00, ind: 90.60, mtk: 86.00, ipa: 82.80, ips: 86.40, ing: 84.80, pjok: 84.80, info: 87.20, seni: 85.60 },
@@ -597,10 +605,10 @@
             `).join('');
         }
 
-        function getPredikat(score) {
-            if(score >= 85) return { text: "Baik", class: "tag-baik" };
-            if(score >= 70) return { text: "Memadai", class: "tag-memadai" };
-            return { text: "Kurang", class: "tag-kurang" };
+        function getPredikatText(score) {
+            if(score >= 85) return "BAIK";
+            if(score >= 70) return "MEMADAI";
+            return "KURANG";
         }
 
         function switchTab(tabName) {
@@ -671,7 +679,8 @@
                     else if(matchStudent.rank === 2) { cardClass = 'card-rank-2'; badgeClass = 'badge-2'; badgeIcon = '<i class="fa-solid fa-medal"></i>'; badgeText = 'Juara 2'; }
                     else if(matchStudent.rank === 3) { cardClass = 'card-rank-3'; badgeClass = 'badge-3'; badgeIcon = '<i class="fa-solid fa-medal"></i>'; badgeText = 'Juara 3'; }
 
-                    let pred = getPredikat(matchStudent.combinedAvg);
+                    let formattedScore = matchStudent.combinedAvg.toFixed(2);
+                    let predikatLabel = getPredikatText(matchStudent.combinedAvg);
 
                     resultContainer.innerHTML = `
                         <div class="m3-glass result-card ${cardClass} bounce-effect">
@@ -685,10 +694,13 @@
                                 </div>
                             </div>
                             
-                            <div class="single-score-container">
-                                <span class="single-score-label">NILAI RATA-RATA AKHIR</span>
-                                <div class="single-score-number">${matchStudent.combinedAvg.toFixed(2)}</div>
-                                <span class="single-score-predikat ${pred.class}">Predikat Kelulusan: ${pred.text}</span>
+                            <div class="congrats-banner">
+                                <div class="congrats-text">
+                                    <i class="fa-solid fa-graduation-cap"></i>
+                                    <span>selamat, lulus dengan rata rata nilai</span>
+                                </div>
+                                <div class="score-display-large">${formattedScore}</div>
+                                <div class="predikat-subtext">PREDIKAT: ${predikatLabel}</div>
                             </div>
 
                             <div class="skl-announcement">
@@ -707,13 +719,13 @@
                                 <div class="skl-block">
                                     <div class="skl-title" style="color: #1e3a8a; border-color: rgba(59, 130, 246, 0.2);">
                                         <i class="fa-solid fa-laptop-code" style="color: #2563eb;"></i>
-                                        <span style="color: #1d4ed8;">UJICOBA APLIKASI SPMB SMA/SMK</span>
+                                        <span style="color: #1d4ed8;">SIMULASI PENDAFTARAN KE SMA</span>
                                     </div>
                                     <ul class="skl-details" style="color: #2563eb;">
-                                        <li><i class="fa-solid fa-calendar-day"></i><span><strong>Tanggal:</strong> 2 s/d 3 Juni 2026</span></li>
-                                        <li><i class="fa-solid fa-clock"></i><span><strong>Website:</strong> sispmb.kepriprov.go.id</span></li>
+                                        <li><i class="fa-solid fa-calendar-day"></i><span><strong>Hari / Tanggal:</strong> Senin, 8 Juni 2026</span></li>
+                                        <li><i class="fa-solid fa-clock"></i><span><strong>Waktu:</strong> Jam 09.00 WIB</span></li>
                                         <li><i class="fa-solid fa-globe"></i><span><strong>Metode:</strong> Daring (Online)</span></li>
-                                        <li><i class="fa-brands fa-whatsapp" style="color: #25d366; font-size: 12px;"></i><span><em>Info selanjutnya silahkan hubungi Panitia SPMB SMA/SMK</em></span></li>
+                                        <li><i class="fa-brands fa-whatsapp" style="color: #25d366; font-size: 12px;"></i><span><em>Info selanjutnya akan diumumkan di Grup WA</em></span></li>
                                     </ul>
                                 </div>
                             </div>
